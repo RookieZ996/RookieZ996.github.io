@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    0511/fakebook&amp;ics-05 |
+    
+    MrzBlog</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/css/technology.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <section class="outer">
+  <article id="post-0511/fakebook&amp;ics-05" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      0511/fakebook&amp;ics-05
+    </h1>
+  
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/05/25/0511/fakebook&ics-05/" class="article-date">
+  <time datetime="2020-05-25T15:07:14.691Z" itemprop="datePublished">2020-05-25</time>
+</a>
+        
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      
+
+      
+        <h2 id="fakebook"><a href="#fakebook" class="headerlink" title="fakebook"></a>fakebook</h2><p>1.尝试性访问robots.txt发现源码泄露，御剑可以扫出flag.php</p>
+<p>2.发现会通过curl发起网络请求获得blog内容并且显示出来</p>
+<p>因为curl_exec()使用不当造成<a href="https://blog.csdn.net/fly_hps/article/details/83046387" target="_blank" rel="noopener">SSRF</a>(服务器端请求伪造)</p>
+<p>3.发现union被过滤，尝试使用/**/绕过</p>
+<p><img src="C:%5CUsers%5C%E6%9C%B1%E7%9B%88%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200511141046161.png" alt="image-20200511141046161"></p>
+<p>4.根据提示信息，知道网站绝对路径，以及数据库中的数据是反序列化存储</p>
+<p>5.根据4得到的路径访问/var/www/html/flag.php</p>
+<p>6.curl支持file协议，构造反序列化内容</p>
+<h2 id="ics-05"><a href="#ics-05" class="headerlink" title="ics-05"></a>ics-05</h2><p>1.利用php://filter/read=convert.base64-encode/resource=index.php读取源码</p>
+<p>2.发现preg_replace函数执行漏洞，直接查询flag文件</p>
+<p><strong>tip：burp中如果要进行system函数调用空格用”+“代替</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://rookiez996.github.io/2020/05/25/0511/fakebook&ics-05/" data-id="ckammmwak0006g8uigrqec7or"
+         class="article-share-link">分享</a>
+      
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+      <a href="/2020/05/25/0512/FlatScience&Cat/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            0512/FlatScience&amp;Cat
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/05/25/0509/shrine&lottery&mfw/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">0509/shrine&amp;lottery&amp;mfw</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+</article>
+
+
+
+</section>
+    </div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+<script src="/js/technology.js"></script>
+
+
+  </div>
+</body>
+</html>

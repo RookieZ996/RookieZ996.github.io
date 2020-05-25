@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    0506/Web_php_include&amp;NewsCenter&amp;NaNNaNNaNNaN-Batman&amp;PHP2 |
+    
+    MrzBlog</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/css/technology.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <section class="outer">
+  <article id="post-0506/Web_php_include&amp;NewsCenter&amp;NaNNaNNaNNaN-Batman&amp;PHP2" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      0506/Web_php_include&amp;NewsCenter&amp;NaNNaNNaNNaN-Batman&amp;PHP2
+    </h1>
+  
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/05/25/0506/Web_php_include&NewsCenter&NaNNaNNaNNaN-Batman&PHP2/" class="article-date">
+  <time datetime="2020-05-25T15:07:14.631Z" itemprop="datePublished">2020-05-25</time>
+</a>
+        
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      
+
+      
+        <p>[TOC]</p>
+<h2 id="Web-php-include"><a href="#Web-php-include" class="headerlink" title="Web_php_include"></a>Web_php_include</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>1.strstr()函数对大小写敏感，利用大写PHP绕过过滤</p>
+<p><strong>php://input</strong>不是很了解，但是题目基本能做</p>
+<h3 id="思路2"><a href="#思路2" class="headerlink" title="思路2"></a>思路2</h3><p>后台扫描发现phpmyadmin</p>
+<p>进入后查看secure_file_priv为空，说明可以写入一句话</p>
+<img src="C:\Users\朱盈\AppData\Roaming\Typora\typora-user-images\image-20200506125126750.png" alt="image-20200506125126750" style="zoom:50%;" />
+
+
+
+<p>利用sql语句植入webshell</p>
+<h2 id="NewsCenter"><a href="#NewsCenter" class="headerlink" title="NewsCenter"></a>NewsCenter</h2><h3 id="思路1-1"><a href="#思路1-1" class="headerlink" title="思路1"></a>思路1</h3><p>1.进入页面后只有一个输入框，考虑xss或者sql注入</p>
+<p>2.利用burp抓包后保存txt文件，再利用sqlmap进行自动注入。</p>
+<p>3.发现news数据库，直接dump数据，得到flag</p>
+<h2 id="NaNNaNNaNNaN-Batman"><a href="#NaNNaNNaNNaN-Batman" class="headerlink" title="NaNNaNNaNNaN-Batman"></a>NaNNaNNaNNaN-Batman</h2><h3 id="思路1-2"><a href="#思路1-2" class="headerlink" title="思路1"></a>思路1</h3><p>1.注意到“_”是一个变量名，将eval改为alert，能将乱码的代码显示出来。</p>
+<p>2.代码审计soeasy。满足16位长度，以及正则匹配。payload：be0f233ac7be98aa</p>
+<h3 id="思路2-1"><a href="#思路2-1" class="headerlink" title="思路2"></a>思路2</h3><p>直接将if语句里面的代码拿到console中执行即可。</p>
+<h2 id="PHP2"><a href="#PHP2" class="headerlink" title="PHP2"></a>PHP2</h2><h3 id="思路1-3"><a href="#思路1-3" class="headerlink" title="思路1"></a>思路1</h3><ol>
+<li>“.phps“后缀第一次见，长记性。</li>
+<li>传递参数id时，浏览器会对非ascii码的字符进行url编码，在代码运行时，会自动进行一次url解码。然后代码中又进行了一次解码。所以一共是两次解码。我们对”a“进行两次编码绕过。</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://rookiez996.github.io/2020/05/25/0506/Web_php_include&NewsCenter&NaNNaNNaNNaN-Batman&PHP2/" data-id="ckammmwai0003g8ui1k9dgwl7"
+         class="article-share-link">分享</a>
+      
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+      <a href="/2020/05/25/0507/unserialize3&upload1&Web_python_template_injection/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            0507/unserialize3&amp;upload1&amp;Web_python_template_injection
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/05/25/0503/jother%E7%BC%96%E7%A0%81/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">0503/jother编码</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+</article>
+
+
+
+</section>
+    </div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+<script src="/js/technology.js"></script>
+
+
+  </div>
+</body>
+</html>

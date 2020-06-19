@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    mysqlLearning/Mysql34题 |
+    
+    MrzBlog</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/css/technology.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <section class="outer">
+  <article id="post-mysqlLearning/Mysql34题" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      mysqlLearning/Mysql34题
+    </h1>
+  
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/06/19/mysqlLearning/Mysql34%E9%A2%98/" class="article-date">
+  <time datetime="2020-06-19T12:19:16.706Z" itemprop="datePublished">2020-06-19</time>
+</a>
+        
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      
+
+      
+        <h1 id="Mysql34题"><a href="#Mysql34题" class="headerlink" title="Mysql34题"></a>Mysql34题</h1><p>[TOC]</p>
+<h2 id="1-取得每个部门最高薪水的人员名称"><a href="#1-取得每个部门最高薪水的人员名称" class="headerlink" title="1.取得每个部门最高薪水的人员名称"></a>1.取得每个部门最高薪水的人员名称</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span></span><br><span class="line">	e.ename,t.*</span><br><span class="line"><span class="keyword">from</span></span><br><span class="line">	(<span class="keyword">select</span> deptno,<span class="keyword">max</span>(sal) maxsal <span class="keyword">from</span> emp <span class="keyword">group</span> <span class="keyword">by</span> deptno)t</span><br><span class="line"><span class="keyword">join</span></span><br><span class="line">	emp e</span><br><span class="line"><span class="keyword">on</span></span><br><span class="line">	e.deptno=t.deptno <span class="keyword">and</span> e.sal=t.maxsal;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/19/mysqlLearning/Mysql34%E9%A2%98/C:%5CUsers%5C%E6%9C%B1%E7%9B%88%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200429133529222.png" alt="image-20200429133529222"></p>
+<h2 id="2-找出在自己部门平均薪水之上的员工"><a href="#2-找出在自己部门平均薪水之上的员工" class="headerlink" title="2.找出在自己部门平均薪水之上的员工"></a>2.找出在自己部门平均薪水之上的员工</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> </span><br><span class="line">	e.ename,e.sal,t.*</span><br><span class="line"><span class="keyword">from</span></span><br><span class="line">	emp e</span><br><span class="line"><span class="keyword">join</span></span><br><span class="line">	(<span class="keyword">select</span> deptno,<span class="keyword">avg</span>(sal) avgsal <span class="keyword">from</span> emp <span class="keyword">group</span> <span class="keyword">by</span>(deptno)) t</span><br><span class="line"><span class="keyword">on</span></span><br><span class="line">	e.sal&gt;t.avgsal <span class="keyword">and</span> e.deptno=t.deptno;</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/06/19/mysqlLearning/Mysql34%E9%A2%98/Users\朱盈\AppData\Roaming\Typora\typora-user-images\image-20200503115254388.png" alt="image-20200503115254388" style="zoom: 80%;">
+
+<h2 id="3-取得每个部门平均的薪水等级"><a href="#3-取得每个部门平均的薪水等级" class="headerlink" title="3.取得每个部门平均的薪水等级"></a>3.取得每个部门平均的薪水等级</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> </span><br><span class="line">	e.deptno,<span class="keyword">avg</span>(s.grade)</span><br><span class="line"><span class="keyword">from</span></span><br><span class="line">	emp e</span><br><span class="line"><span class="keyword">join</span></span><br><span class="line">	salgrade s</span><br><span class="line"><span class="keyword">on</span></span><br><span class="line">	e.sal <span class="keyword">between</span> s.losal <span class="keyword">and</span> s.hisal</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span></span><br><span class="line">	deptno;</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/06/19/mysqlLearning/Mysql34%E9%A2%98/Users\朱盈\AppData\Roaming\Typora\typora-user-images\image-20200504124123097.png" alt="image-20200504124123097" style="zoom: 80%;">
+
+<h2 id="4-不使用max函数找出最高工资（两种方法）"><a href="#4-不使用max函数找出最高工资（两种方法）" class="headerlink" title="4.不使用max函数找出最高工资（两种方法）"></a>4.不使用max函数找出最高工资（两种方法）</h2><p>1.排序</p>
+<p>2.自连接</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> </span><br><span class="line">	sal </span><br><span class="line"><span class="keyword">from</span> </span><br><span class="line">	emp </span><br><span class="line"><span class="keyword">where</span> </span><br><span class="line">	sal </span><br><span class="line">	<span class="keyword">not</span> <span class="keyword">in</span> </span><br><span class="line">	(<span class="keyword">select</span> <span class="keyword">distinct</span>(a.sal) <span class="keyword">from</span> emp a <span class="keyword">join</span> emp b <span class="keyword">on</span> a.sal&lt;b.sal);</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-取得平均薪水最高的部门的编号"><a href="#5-取得平均薪水最高的部门的编号" class="headerlink" title="5.取得平均薪水最高的部门的编号"></a>5.取得平均薪水最高的部门的编号</h2><p>方案1</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> deptno,<span class="keyword">avg</span>(sal) asal <span class="keyword">from</span> emp <span class="keyword">group</span> <span class="keyword">by</span> deptno <span class="keyword">order</span> <span class="keyword">by</span> asal <span class="keyword">desc</span> <span class="keyword">limit</span> <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/19/mysqlLearning/Mysql34%E9%A2%98/C:%5CUsers%5C%E6%9C%B1%E7%9B%88%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200506164501194.png" alt="image-20200506164501194"></p>
+<p>方案2</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">select </span><br><span class="line">	deptno,avg(sal) avgsal </span><br><span class="line">from </span><br><span class="line">	emp</span><br><span class="line">group by </span><br><span class="line">	deptno</span><br><span class="line">having </span><br><span class="line">	avgsal&#x3D;(select max(t.asal) from (select avg(sal) asal from emp group by deptno) t);</span><br></pre></td></tr></table></figure>
+
+<p><strong>having的使用不熟练</strong></p>
+<h2 id="6-取得平均薪水最高的部门的部门名称"><a href="#6-取得平均薪水最高的部门的部门名称" class="headerlink" title="6.取得平均薪水最高的部门的部门名称"></a>6.取得平均薪水最高的部门的部门名称</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--1</span></span><br><span class="line"><span class="keyword">select</span> </span><br><span class="line">	s.*,d.dname </span><br><span class="line"><span class="keyword">from</span> </span><br><span class="line">	(<span class="keyword">select</span> deptno,<span class="keyword">avg</span>(sal) avgsal <span class="keyword">from</span> emp <span class="keyword">group</span> <span class="keyword">by</span> deptno <span class="keyword">order</span> <span class="keyword">by</span> avgsal <span class="keyword">desc</span> 	<span class="keyword">limit</span> <span class="number">1</span>) s </span><br><span class="line"><span class="keyword">join</span> </span><br><span class="line">	dept d </span><br><span class="line"><span class="keyword">on</span> </span><br><span class="line">	d.deptno=s.deptno;</span><br><span class="line">	</span><br><span class="line"><span class="comment">--2</span></span><br><span class="line"><span class="keyword">select</span> </span><br><span class="line">	d.dname,<span class="keyword">avg</span>(sal) avgsal</span><br><span class="line"><span class="keyword">from</span></span><br><span class="line">	dept d</span><br><span class="line"><span class="keyword">join</span></span><br><span class="line">	emp e</span><br><span class="line"><span class="keyword">on</span></span><br><span class="line">	e.deptno=d.deptno</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span></span><br><span class="line">	d.dname</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span></span><br><span class="line">	avgsal <span class="keyword">desc</span></span><br><span class="line"><span class="keyword">limit</span> <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/19/mysqlLearning/Mysql34%E9%A2%98/C:%5CUsers%5C%E6%9C%B1%E7%9B%88%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200507115136504.png" alt="image-20200507115136504"></p>
+<h2 id="7-求平均薪水等级最低的部门名称"><a href="#7-求平均薪水等级最低的部门名称" class="headerlink" title="7.求平均薪水等级最低的部门名称"></a>7.求平均薪水等级最低的部门名称</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> t.*,s.grade </span><br><span class="line"><span class="keyword">from</span> </span><br><span class="line">	(<span class="keyword">select</span> d.dname,<span class="keyword">avg</span>(e.sal)avgsal <span class="keyword">from</span> dept d <span class="keyword">join</span> emp e <span class="keyword">on</span> e.deptno=d.deptno <span class="keyword">group</span> <span class="keyword">by</span> d.dname)t </span><br><span class="line"><span class="keyword">join</span> </span><br><span class="line">	salgrade s </span><br><span class="line"><span class="keyword">on</span> </span><br><span class="line">	t.avgsal <span class="keyword">between</span> s.losal <span class="keyword">and</span> s.hisal </span><br><span class="line"><span class="keyword">where</span> </span><br><span class="line">	grade=(<span class="keyword">select</span> s.grade <span class="keyword">from</span> salgrade s <span class="keyword">where</span> (<span class="keyword">select</span> <span class="keyword">avg</span>(e.sal)avgsal <span class="keyword">from</span> 		dept d <span class="keyword">join</span> emp e <span class="keyword">on</span> e.deptno=d.deptno <span class="keyword">group</span> <span class="keyword">by</span> d.dname <span class="keyword">order</span> <span class="keyword">by</span> avgsal 		<span class="keyword">limit</span> <span class="number">1</span>) <span class="keyword">between</span> s.losal <span class="keyword">and</span> s.hisal);</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line"><span class="keyword">select</span> t.*,s.grade <span class="keyword">from</span> (<span class="keyword">select</span> d.dname,<span class="keyword">avg</span>(e.sal) asal <span class="keyword">from</span> emp e <span class="keyword">join</span> dept d <span class="keyword">on</span> d.deptno=e.deptno <span class="keyword">group</span> <span class="keyword">by</span> dname) t <span class="keyword">join</span> salgrade s <span class="keyword">on</span> t.asal <span class="keyword">between</span> s.losal <span class="keyword">and</span> s.hisal <span class="keyword">having</span> s.grade=(<span class="keyword">select</span> s.grade <span class="keyword">from</span> salgrade s <span class="keyword">join</span> (<span class="keyword">select</span> <span class="keyword">avg</span>(e.sal) avgsal <span class="keyword">from</span> emp e <span class="keyword">join</span> dept d <span class="keyword">on</span> d.deptno=e.deptno <span class="keyword">group</span> <span class="keyword">by</span> dname <span class="keyword">order</span> <span class="keyword">by</span> avgsal <span class="keyword">limit</span> <span class="number">1</span>) t <span class="keyword">on</span> t.avgsal <span class="keyword">between</span> s.losal <span class="keyword">and</span> s.hisal) ;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/19/mysqlLearning/Mysql34%E9%A2%98/C:%5CUsers%5C%E6%9C%B1%E7%9B%88%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200507121639001.png" alt="image-20200507121639001"></p>
+<h2 id="8-取得工资比普通员工（员工代号没出现在mgr字段上的）的最高薪水还高的领导姓名"><a href="#8-取得工资比普通员工（员工代号没出现在mgr字段上的）的最高薪水还高的领导姓名" class="headerlink" title="8.取得工资比普通员工（员工代号没出现在mgr字段上的）的最高薪水还高的领导姓名"></a>8.取得工资比普通员工（员工代号没出现在mgr字段上的）的最高薪水还高的领导姓名</h2><p><strong>注意not in时要去掉null</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">---1</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">distinct</span> m.ename <span class="keyword">from</span> emp m <span class="keyword">join</span> emp e <span class="keyword">where</span> e.mgr=m.empno <span class="keyword">and</span> m.sal&gt;(<span class="keyword">select</span> <span class="keyword">max</span>(e.sal) maxsal <span class="keyword">from</span> emp e <span class="keyword">where</span> e.empno <span class="keyword">not</span> <span class="keyword">in</span> (<span class="keyword">select</span> <span class="keyword">distinct</span> mgr <span class="keyword">from</span> emp <span class="keyword">where</span> mgr <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">null</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">---2比普通员工最高薪水还高的一定是领导</span></span><br><span class="line"><span class="keyword">select</span> e.ename <span class="keyword">from</span> emp e <span class="keyword">where</span> e.sal&gt;(<span class="keyword">select</span> <span class="keyword">max</span>(e.sal) maxsal <span class="keyword">from</span> emp e <span class="keyword">where</span> e.empno <span class="keyword">not</span> <span class="keyword">in</span>(<span class="keyword">select</span> <span class="keyword">distinct</span> e.mgr <span class="keyword">from</span> emp e <span class="keyword">where</span> e.mgr <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">null</span>));</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/06/19/mysqlLearning/Mysql34%E9%A2%98/Users\朱盈\AppData\Roaming\Typora\typora-user-images\image-20200508125349221.png" alt="image-20200508125349221" style="zoom: 67%;">
+
+<h2 id="9-取得薪水最高的前五名"><a href="#9-取得薪水最高的前五名" class="headerlink" title="9.取得薪水最高的前五名"></a>9.取得薪水最高的前五名</h2><img src="/2020/06/19/mysqlLearning/Mysql34%E9%A2%98/Users\朱盈\AppData\Roaming\Typora\typora-user-images\image-20200508125718896.png" alt="image-20200508125718896" style="zoom:67%;">
+
+<h2 id="10-取得薪水最高的第六到第十名员工"><a href="#10-取得薪水最高的第六到第十名员工" class="headerlink" title="10.取得薪水最高的第六到第十名员工"></a>10.取得薪水最高的第六到第十名员工</h2><p>limit 第一个参数是起始位置，从0开始记，第二个参数表示长度</p>
+<img src="/2020/06/19/mysqlLearning/Mysql34%E9%A2%98/Users\朱盈\AppData\Roaming\Typora\typora-user-images\image-20200508125726403.png" alt="image-20200508125726403" style="zoom:67%;">
+
+<h2 id="11-取得最后入职的5名员工"><a href="#11-取得最后入职的5名员工" class="headerlink" title="11.取得最后入职的5名员工"></a>11.取得最后入职的5名员工</h2><p><img src="/2020/06/19/mysqlLearning/Mysql34%E9%A2%98/C:%5CUsers%5C%E6%9C%B1%E7%9B%88%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200508130023904.png" alt="image-20200508130023904"></p>
+<h2 id="12-取得每个薪水等级有多少员工"><a href="#12-取得每个薪水等级有多少员工" class="headerlink" title="12.取得每个薪水等级有多少员工"></a>12.取得每个薪水等级有多少员工</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> s.grade,<span class="keyword">count</span>(s.grade) cnt <span class="keyword">from</span> emp e <span class="keyword">join</span> salgrade s <span class="keyword">on</span> e.sal <span class="keyword">between</span> s.losal <span class="keyword">and</span> s.hisal <span class="keyword">group</span> <span class="keyword">by</span> grade;</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/06/19/mysqlLearning/Mysql34%E9%A2%98/Users\朱盈\AppData\Roaming\Typora\typora-user-images\image-20200509150719256.png" alt="image-20200509150719256" style="zoom: 67%;">
+
+<h2 id="13-有三个表S学生表，C课程表，SC学生选课表，S（SNO-SNAME）代表学生姓名及学号"><a href="#13-有三个表S学生表，C课程表，SC学生选课表，S（SNO-SNAME）代表学生姓名及学号" class="headerlink" title="13.有三个表S学生表，C课程表，SC学生选课表，S（SNO,SNAME）代表学生姓名及学号"></a>13.有三个表S学生表，C课程表，SC学生选课表，S（SNO,SNAME）代表学生姓名及学号</h2><h2 id="14-列出所有员工及领导姓名"><a href="#14-列出所有员工及领导姓名" class="headerlink" title="14.列出所有员工及领导姓名"></a>14.列出所有员工及领导姓名</h2><p><strong>注意是左外连接，不能写内连接</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> e.ename,m.ename <span class="keyword">from</span> emp e <span class="keyword">left</span> <span class="keyword">join</span> emp m <span class="keyword">on</span> e.mgr=m.empno;</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/06/19/mysqlLearning/Mysql34%E9%A2%98/Users\朱盈\AppData\Roaming\Typora\typora-user-images\image-20200509151100011.png" alt="image-20200509151100011" style="zoom:67%;">
+
+<h2 id="15-列出受雇日期早于其直接上级的所有员工的编号，姓名，部门名称。"><a href="#15-列出受雇日期早于其直接上级的所有员工的编号，姓名，部门名称。" class="headerlink" title="15.列出受雇日期早于其直接上级的所有员工的编号，姓名，部门名称。"></a>15.列出受雇日期早于其直接上级的所有员工的编号，姓名，部门名称。</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> t.*,d.dname <span class="keyword">from</span> (<span class="keyword">select</span> e.empno,e.ename,e.deptno <span class="keyword">from</span> emp e <span class="keyword">join</span> emp m <span class="keyword">on</span> e.mgr=m.empno <span class="keyword">and</span> e.hiredate&lt;m.hiredate) t <span class="keyword">join</span> dept d <span class="keyword">on</span> t.deptno=d.deptno;</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/06/19/mysqlLearning/Mysql34%E9%A2%98/Users\朱盈\AppData\Roaming\Typora\typora-user-images\image-20200509151541905.png" alt="image-20200509151541905" style="zoom:67%;">
+
+<h2 id="16-列出部门名称和这些部门的员工信息，同时列出那些没有员工的部门"><a href="#16-列出部门名称和这些部门的员工信息，同时列出那些没有员工的部门" class="headerlink" title="16.列出部门名称和这些部门的员工信息，同时列出那些没有员工的部门"></a>16.列出部门名称和这些部门的员工信息，同时列出那些没有员工的部门</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> e.empno,e.ename,d.dname <span class="keyword">from</span> dept d <span class="keyword">left</span> <span class="keyword">join</span> emp e <span class="keyword">on</span> e.deptno=d.deptno;</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/06/19/mysqlLearning/Mysql34%E9%A2%98/Users\朱盈\AppData\Roaming\Typora\typora-user-images\image-20200511183145932.png" alt="image-20200511183145932" style="zoom:67%;">
+
+<h2 id="17-列出至少有五个员工的所有部门"><a href="#17-列出至少有五个员工的所有部门" class="headerlink" title="17.列出至少有五个员工的所有部门"></a>17.列出至少有五个员工的所有部门</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> deptno <span class="keyword">from</span> emp <span class="keyword">group</span> <span class="keyword">by</span> deptno <span class="keyword">having</span> <span class="keyword">count</span>(*)&gt;=<span class="number">5</span>;</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/06/19/mysqlLearning/Mysql34%E9%A2%98/Users\朱盈\AppData\Roaming\Typora\typora-user-images\image-20200511183549745.png" alt="image-20200511183549745" style="zoom:67%;">
+
+<h2 id="18-列出工资比SIMTH高的员工信息"><a href="#18-列出工资比SIMTH高的员工信息" class="headerlink" title="18.列出工资比SIMTH高的员工信息"></a>18.列出工资比SIMTH高的员工信息</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> e.* <span class="keyword">from</span> emp e <span class="keyword">where</span> e.sal&gt;(<span class="keyword">select</span> sal <span class="keyword">from</span> emp <span class="keyword">where</span> ename=<span class="string">'SMITH'</span>);</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/06/19/mysqlLearning/Mysql34%E9%A2%98/Users\朱盈\AppData\Roaming\Typora\typora-user-images\image-20200511183718477.png" alt="image-20200511183718477" style="zoom:67%;">
+
+<h2 id="19-列出所有CLERK的姓名及部门名称，部门的人数"><a href="#19-列出所有CLERK的姓名及部门名称，部门的人数" class="headerlink" title="19.列出所有CLERK的姓名及部门名称，部门的人数"></a>19.列出所有CLERK的姓名及部门名称，部门的人数</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> t.*,t1.cnt <span class="keyword">from</span> (<span class="keyword">select</span> e.ename,e.deptno,d.dname <span class="keyword">from</span> emp e <span class="keyword">join</span> dept d <span class="keyword">on</span> d.deptno=e.deptno <span class="keyword">where</span> e.job=<span class="string">'CLERK'</span>) t <span class="keyword">join</span> (<span class="keyword">select</span> deptno,<span class="keyword">count</span>(deptno) cnt <span class="keyword">from</span> emp <span class="keyword">group</span> <span class="keyword">by</span> deptno) t1 <span class="keyword">on</span> t1.deptno=t.deptno;</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/06/19/mysqlLearning/Mysql34%E9%A2%98/Users\朱盈\AppData\Roaming\Typora\typora-user-images\image-20200511185031890.png" alt="image-20200511185031890" style="zoom: 67%;">
+
+<h2 id="20-列出最低薪金大于1500的各种工作及从事此工作的员工数"><a href="#20-列出最低薪金大于1500的各种工作及从事此工作的员工数" class="headerlink" title="20.列出最低薪金大于1500的各种工作及从事此工作的员工数"></a>20.列出最低薪金大于1500的各种工作及从事此工作的员工数</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--1(复杂)</span></span><br><span class="line"><span class="keyword">select</span> job,<span class="keyword">count</span>(*) cnt <span class="keyword">from</span> emp <span class="keyword">group</span> <span class="keyword">by</span> job;</span><br><span class="line"><span class="keyword">select</span> job,<span class="keyword">min</span>(sal) losal <span class="keyword">from</span> emp <span class="keyword">group</span> <span class="keyword">by</span> job <span class="keyword">having</span> losal&gt;<span class="number">1500</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> t.*,t1.* <span class="keyword">from</span> (<span class="keyword">select</span> job,<span class="keyword">count</span>(*) cnt <span class="keyword">from</span> emp <span class="keyword">group</span> <span class="keyword">by</span> job) t <span class="keyword">right</span> <span class="keyword">join</span> (<span class="keyword">select</span> job,<span class="keyword">min</span>(sal) losal <span class="keyword">from</span> emp <span class="keyword">group</span> <span class="keyword">by</span> job <span class="keyword">having</span> losal&gt;<span class="number">1500</span>) t1 <span class="keyword">on</span> t1.job=t.job;</span><br><span class="line"></span><br><span class="line"><span class="comment">--2</span></span><br><span class="line"><span class="keyword">select</span> job,<span class="keyword">count</span>(*) <span class="keyword">from</span> emp <span class="keyword">group</span> <span class="keyword">by</span> job <span class="keyword">having</span> <span class="keyword">min</span>(sal)&gt;<span class="number">1500</span>;</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/06/19/mysqlLearning/Mysql34%E9%A2%98/Users\朱盈\AppData\Roaming\Typora\typora-user-images\image-20200512101156819.png" alt="image-20200512101156819" style="zoom:67%;">
+
+<h2 id="21-列出在SALES工作的员工姓名"><a href="#21-列出在SALES工作的员工姓名" class="headerlink" title="21.列出在SALES工作的员工姓名"></a>21.列出在SALES工作的员工姓名</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> ename <span class="keyword">from</span> emp <span class="keyword">where</span> deptno=(<span class="keyword">select</span> deptno <span class="keyword">from</span> dept <span class="keyword">where</span> dname=<span class="string">'SALES'</span>);</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/06/19/mysqlLearning/Mysql34%E9%A2%98/Users\朱盈\AppData\Roaming\Typora\typora-user-images\image-20200512114748993.png" alt="image-20200512114748993" style="zoom:67%;">
+
+<h2 id="22-列出薪金高于公司平均薪金的所有员工所在部门，上级领导，员工工资等级。"><a href="#22-列出薪金高于公司平均薪金的所有员工所在部门，上级领导，员工工资等级。" class="headerlink" title="22.列出薪金高于公司平均薪金的所有员工所在部门，上级领导，员工工资等级。"></a>22.列出薪金高于公司平均薪金的所有员工所在部门，上级领导，员工工资等级。</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> e.ename,m.ename mgr,d.dname,e.sal,s.grade <span class="keyword">from</span> emp e <span class="keyword">left</span> <span class="keyword">join</span> emp m <span class="keyword">on</span> e.mgr=m.empno <span class="keyword">join</span> dept d <span class="keyword">on</span> d.deptno=e.deptno <span class="keyword">join</span> salgrade s <span class="keyword">on</span> e.sal <span class="keyword">between</span> s.losal <span class="keyword">and</span> s.hisal <span class="keyword">where</span> e.sal&gt;(<span class="keyword">select</span> <span class="keyword">avg</span>(sal) <span class="keyword">from</span> emp);</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/06/19/mysqlLearning/Mysql34%E9%A2%98/Users\朱盈\AppData\Roaming\Typora\typora-user-images\image-20200512115403285.png" alt="image-20200512115403285" style="zoom:67%;">
+
+<h2 id="23-列出与SCOTT从事相同工作的所有员工及部门名称"><a href="#23-列出与SCOTT从事相同工作的所有员工及部门名称" class="headerlink" title="23.列出与SCOTT从事相同工作的所有员工及部门名称"></a>23.列出与SCOTT从事相同工作的所有员工及部门名称</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> e.ename,d.dname <span class="keyword">from</span> emp e <span class="keyword">join</span> dept d <span class="keyword">on</span> d.deptno=e.deptno <span class="keyword">where</span> e.job=(<span class="keyword">select</span> job <span class="keyword">from</span> emp <span class="keyword">where</span> ename=<span class="string">'SCOTT'</span>) <span class="keyword">and</span> e.ename != <span class="string">'SCOTT'</span>;</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/06/19/mysqlLearning/Mysql34%E9%A2%98/Users\朱盈\AppData\Roaming\Typora\typora-user-images\image-20200513110108487.png" alt="image-20200513110108487" style="zoom:67%;">
+
+<h2 id="24-列出薪资等于30部门中员工薪资的其他员工的姓名和薪资"><a href="#24-列出薪资等于30部门中员工薪资的其他员工的姓名和薪资" class="headerlink" title="24.列出薪资等于30部门中员工薪资的其他员工的姓名和薪资"></a>24.列出薪资等于30部门中员工薪资的其他员工的姓名和薪资</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> ename,sal <span class="keyword">from</span> emp <span class="keyword">where</span> sal <span class="keyword">in</span> (<span class="keyword">select</span> <span class="keyword">distinct</span> sal <span class="keyword">from</span> emp <span class="keyword">where</span> deptno=<span class="number">30</span>) <span class="keyword">and</span> deptno&lt;&gt;<span class="number">30</span>;</span><br></pre></td></tr></table></figure>
+
+<p>结果：空表</p>
+<h2 id="25-列出薪金高于30部门所有员工薪金的员工姓名和薪金，部门名称"><a href="#25-列出薪金高于30部门所有员工薪金的员工姓名和薪金，部门名称" class="headerlink" title="25.列出薪金高于30部门所有员工薪金的员工姓名和薪金，部门名称"></a>25.列出薪金高于30部门所有员工薪金的员工姓名和薪金，部门名称</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> e.ename,e.sal,d.dname <span class="keyword">from</span> emp e <span class="keyword">join</span> dept d <span class="keyword">on</span> e.deptno=d.deptno <span class="keyword">where</span> sal &gt;(<span class="keyword">select</span> <span class="keyword">max</span>(sal) <span class="keyword">from</span> emp <span class="keyword">where</span> deptno=<span class="number">30</span>);</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/06/19/mysqlLearning/Mysql34%E9%A2%98/Users\朱盈\AppData\Roaming\Typora\typora-user-images\image-20200513113952608.png" alt="image-20200513113952608" style="zoom:67%;">
+
+<h2 id="26-列出每个部门工作的员工数量，平均工资和平均服务期限"><a href="#26-列出每个部门工作的员工数量，平均工资和平均服务期限" class="headerlink" title="26.列出每个部门工作的员工数量，平均工资和平均服务期限"></a>26.列出每个部门工作的员工数量，平均工资和平均服务期限</h2><p><strong>tip: timestampdiff函数</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> d.deptno,<span class="keyword">count</span>(empno),<span class="keyword">ifnull</span>(<span class="keyword">avg</span>(sal),<span class="number">0</span>) AvgSal,<span class="keyword">ifnull</span>(<span class="keyword">avg</span>(<span class="keyword">timestampdiff</span>(<span class="keyword">year</span>,hiredate,<span class="keyword">now</span>())),<span class="number">0</span>) AvgServiceYear <span class="keyword">from</span> emp e <span class="keyword">right</span> <span class="keyword">join</span> dept d <span class="keyword">on</span> e.deptno=d.deptno <span class="keyword">group</span> <span class="keyword">by</span> d.deptno;</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/06/19/mysqlLearning/Mysql34%E9%A2%98/Users\朱盈\AppData\Roaming\Typora\typora-user-images\image-20200514095139611.png" alt="image-20200514095139611" style="zoom:67%;">
+
+<h2 id="27-列出所有员工姓名，部门名称和工资。"><a href="#27-列出所有员工姓名，部门名称和工资。" class="headerlink" title="27.列出所有员工姓名，部门名称和工资。"></a>27.列出所有员工姓名，部门名称和工资。</h2><p>略</p>
+<h2 id="28-列出所有部门的详细信息和人数"><a href="#28-列出所有部门的详细信息和人数" class="headerlink" title="28.列出所有部门的详细信息和人数"></a>28.列出所有部门的详细信息和人数</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> d.*,<span class="keyword">ifnull</span>(<span class="keyword">count</span>(e.empno),<span class="number">0</span>) cnt <span class="keyword">from</span> dept d <span class="keyword">left</span> <span class="keyword">join</span> emp e <span class="keyword">on</span> e.deptno=d.deptno <span class="keyword">group</span> <span class="keyword">by</span> d.deptno,d.dname,d.loc;</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/06/19/mysqlLearning/Mysql34%E9%A2%98/Users\朱盈\AppData\Roaming\Typora\typora-user-images\image-20200514095856228.png" alt="image-20200514095856228" style="zoom:67%;">
+
+<h2 id="29-列出各种工作的最低工资以及从事此工作的雇员"><a href="#29-列出各种工作的最低工资以及从事此工作的雇员" class="headerlink" title="29.列出各种工作的最低工资以及从事此工作的雇员"></a>29.列出各种工作的最低工资以及从事此工作的雇员</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> t.*,e.ename <span class="keyword">from</span> emp e <span class="keyword">join</span> (<span class="keyword">select</span> job,<span class="keyword">min</span>(sal) minsal <span class="keyword">from</span> emp <span class="keyword">group</span> <span class="keyword">by</span> job) t <span class="keyword">on</span> t.job=e.job <span class="keyword">and</span> t.minsal=e.sal;</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/06/19/mysqlLearning/Mysql34%E9%A2%98/Users\朱盈\AppData\Roaming\Typora\typora-user-images\image-20200514100257519.png" alt="image-20200514100257519" style="zoom:67%;">
+
+<h2 id="30-列出各个部门“manager”的最低薪资"><a href="#30-列出各个部门“manager”的最低薪资" class="headerlink" title="30.列出各个部门“manager”的最低薪资"></a>30.列出各个部门“manager”的最低薪资</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> deptno,<span class="keyword">min</span>(sal) <span class="keyword">from</span> emp <span class="keyword">where</span> job=<span class="string">'MANAGER'</span> <span class="keyword">group</span> <span class="keyword">by</span> deptno;</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/06/19/mysqlLearning/Mysql34%E9%A2%98/Users\朱盈\AppData\Roaming\Typora\typora-user-images\image-20200514100654441.png" alt="image-20200514100654441" style="zoom:67%;">
+
+<h2 id="31-找出所有员工年薪，从低到高排序"><a href="#31-找出所有员工年薪，从低到高排序" class="headerlink" title="31.找出所有员工年薪，从低到高排序"></a>31.找出所有员工年薪，从低到高排序</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> ename,(sal+<span class="keyword">ifnull</span>(comm,<span class="number">0</span>))*<span class="number">12</span> yearsal <span class="keyword">from</span> emp <span class="keyword">order</span> <span class="keyword">by</span> yearsal;</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/06/19/mysqlLearning/Mysql34%E9%A2%98/Users\朱盈\AppData\Roaming\Typora\typora-user-images\image-20200514100915892.png" alt="image-20200514100915892" style="zoom:67%;">
+
+<h2 id="32-求出员工领导薪水超过3000的员工名称与领导名称"><a href="#32-求出员工领导薪水超过3000的员工名称与领导名称" class="headerlink" title="32.求出员工领导薪水超过3000的员工名称与领导名称"></a>32.求出员工领导薪水超过3000的员工名称与领导名称</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> e.ename,m.ename <span class="keyword">from</span> emp e <span class="keyword">join</span> emp m <span class="keyword">on</span> e.mgr=m.empno <span class="keyword">where</span> m.sal&gt;<span class="number">3000</span>;</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/06/19/mysqlLearning/Mysql34%E9%A2%98/Users\朱盈\AppData\Roaming\Typora\typora-user-images\image-20200514101206184.png" alt="image-20200514101206184" style="zoom:67%;">
+
+<h2 id="33-求出部门名称中带‘S’字符的部门的员工工资合计、部门人数"><a href="#33-求出部门名称中带‘S’字符的部门的员工工资合计、部门人数" class="headerlink" title="33.求出部门名称中带‘S’字符的部门的员工工资合计、部门人数"></a>33.求出部门名称中带‘S’字符的部门的员工工资合计、部门人数</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> d.dname,<span class="keyword">ifnull</span>(<span class="keyword">sum</span>(e.sal),<span class="number">0</span>) sumsal,<span class="keyword">count</span>(e.empno) <span class="keyword">from</span> dept d <span class="keyword">left</span> <span class="keyword">join</span> emp e <span class="keyword">on</span> e.deptno=d.deptno <span class="keyword">where</span> d.dname <span class="keyword">like</span> <span class="string">'%S%'</span> <span class="keyword">group</span> <span class="keyword">by</span> dname;</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/06/19/mysqlLearning/Mysql34%E9%A2%98/Users\朱盈\AppData\Roaming\Typora\typora-user-images\image-20200514111102563.png" alt="image-20200514111102563" style="zoom:67%;">
+
+<h2 id="34-给任职超过30年的员工加薪10"><a href="#34-给任职超过30年的员工加薪10" class="headerlink" title="34.给任职超过30年的员工加薪10%"></a>34.给任职超过30年的员工加薪10%</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">update</span> emp_addsal <span class="keyword">set</span> sal=sal*<span class="number">1.1</span> <span class="keyword">where</span> <span class="keyword">timestampdiff</span>(<span class="keyword">year</span>,hiredate,<span class="keyword">now</span>())&gt;<span class="number">30</span>;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://rookiez996.github.io/2020/06/19/mysqlLearning/Mysql34%E9%A2%98/" data-id="ckbm6k5ak0000skui2va7bjt8"
+         class="article-share-link">分享</a>
+      
+    </footer>
+
+  </div>
+
+  
+    
+
+  
+
+  
+    
+  
+
+</article>
+
+
+
+</section>
+    </div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+<script src="/js/technology.js"></script>
+
+
+  </div>
+</body>
+</html>

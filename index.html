@@ -266,7 +266,7 @@
                 <div class="image-caption"></div>
             </figure>
 
-<h2 id="Pass-06（空格绕过）"><a href="#Pass-06（空格绕过）" class="headerlink" title="Pass-06（空格绕过）"></a>Pass-06（空格绕过）</h2><p>注意到此题处理文件后缀时并未去除空格，因此可以利用空格绕过。</p>
+<h3 id="Pass-06（空格绕过）"><a href="#Pass-06（空格绕过）" class="headerlink" title="Pass-06（空格绕过）"></a>Pass-06（空格绕过）</h3><p>注意到此题处理文件后缀时并未去除空格，因此可以利用空格绕过。</p>
 <p>师傅说：windows系统下文件后缀是不可以带有空格和点.的，例如 <strong>xxx.jpg[空格]</strong> 和 <strong>xxx.jpg.</strong> 都是不允许的，并且系统会自动去除掉空格和点。因此我们可以抓包修改文件名为xxx.php[空格]绕过。</p>
 <p>但是，笔者在实践时并未成功，可以绕过黑名单检测，但是在第二个if时判断结果为false，返回的信息是“上传出错”，如果有清楚的还请师傅们指教。</p>
 <figure class="image-bubble">
@@ -277,7 +277,7 @@
                 <div class="image-caption"></div>
             </figure>
 
-<h2 id="Pass-07-点绕过"><a href="#Pass-07-点绕过" class="headerlink" title="Pass-07(点绕过)"></a>Pass-07(点绕过)</h2><p>此题与上题类似，这题在处理文件后缀时去掉了空格，但是未去掉点。因此可以在文件后缀加点进行绕过，抓包修改文件名为xxx.php.</p>
+<h3 id="Pass-07-点绕过"><a href="#Pass-07-点绕过" class="headerlink" title="Pass-07(点绕过)"></a>Pass-07(点绕过)</h3><p>此题与上题类似，这题在处理文件后缀时去掉了空格，但是未去掉点。因此可以在文件后缀加点进行绕过，抓包修改文件名为xxx.php.</p>
 <p>同样笔者在实践时并未成功，请师傅们指教。</p>
 <figure class="image-bubble">
                 <div class="img-lightbox">
@@ -287,7 +287,7 @@
                 <div class="image-caption"></div>
             </figure>
 
-<h2 id="Pass-08（-DATA绕过）"><a href="#Pass-08（-DATA绕过）" class="headerlink" title="Pass-08（::$DATA绕过）"></a>Pass-08（::$DATA绕过）</h2><p>注意到此处并未过滤::$DATA，师傅说：在windows系统下，如果文件名+”::$DATA”会把::$DATA之后的数据当成文件流处理,不会检测后缀名.且保持”::$DATA”之前的文件名。因此可以在文件后缀加上::$DATA进行绕过，直接抓包修改文件后缀为xxx.php::$DATA即可，上传后的文件名即为xxx.php</p>
+<h3 id="Pass-08（-DATA绕过）"><a href="#Pass-08（-DATA绕过）" class="headerlink" title="Pass-08（::$DATA绕过）"></a>Pass-08（::$DATA绕过）</h3><p>注意到此处并未过滤::$DATA，师傅说：在windows系统下，如果文件名+”::$DATA”会把::$DATA之后的数据当成文件流处理,不会检测后缀名.且保持”::$DATA”之前的文件名。因此可以在文件后缀加上::$DATA进行绕过，直接抓包修改文件后缀为xxx.php::$DATA即可，上传后的文件名即为xxx.php</p>
 <blockquote>
 <p>NTFS文件系统包括对备用数据流的支持。这不是众所周知的功能，主要包括提供与Macintosh文件系统中的文件的兼容性。备用数据流允许文件包含多个数据流。每个文件至少有一个数据流。在Windows中，此默认数据流称为：$ DATA。</p>
 </blockquote>
@@ -299,7 +299,7 @@
                 <div class="image-caption"></div>
             </figure>
 
-<h2 id="Pass-09（空格-点绕过）"><a href="#Pass-09（空格-点绕过）" class="headerlink" title="Pass-09（空格+点绕过）"></a>Pass-09（空格+点绕过）</h2><p>注意到此处过滤了空格和点，但是都只过滤了一次，因此可以抓包修改文件名为<strong>xxx.php.[空格] .</strong>进行绕过。</p>
+<h3 id="Pass-09（空格-点绕过）"><a href="#Pass-09（空格-点绕过）" class="headerlink" title="Pass-09（空格+点绕过）"></a>Pass-09（空格+点绕过）</h3><p>注意到此处过滤了空格和点，但是都只过滤了一次，因此可以抓包修改文件名为<strong>xxx.php.[空格] .</strong>进行绕过。</p>
 <p>第一个deldot函数删除末尾的点变成<strong>xxx.php.[空格]</strong>，在经过最后的trim函数删除空格变成<strong>xxx.php.</strong>，</p>
 <p>即可绕过黑名单检测，上传至windows系统后，系统自动删除后缀中的.，此时文件名为<strong>xxx.php</strong>， 即完成了一句话木马的写入</p>
 <figure class="image-bubble">
@@ -310,7 +310,7 @@
                 <div class="image-caption"></div>
             </figure>
 
-<h2 id="Pass-10（双写绕过）"><a href="#Pass-10（双写绕过）" class="headerlink" title="Pass-10（双写绕过）"></a>Pass-10（双写绕过）</h2><p>注意到此处对黑名单进行了替换操作，将黑名单中的内容替换为空。采用双写绕过，上传xxx.pphphp即可。<strong>切勿上传xxx.phphpp，因为替换后会变成xxx.hpp。</strong></p>
+<h3 id="Pass-10（双写绕过）"><a href="#Pass-10（双写绕过）" class="headerlink" title="Pass-10（双写绕过）"></a>Pass-10（双写绕过）</h3><p>注意到此处对黑名单进行了替换操作，将黑名单中的内容替换为空。采用双写绕过，上传xxx.pphphp即可。<strong>切勿上传xxx.phphpp，因为替换后会变成xxx.hpp。</strong></p>
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>

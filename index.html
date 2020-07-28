@@ -238,7 +238,7 @@
                 <div class="image-caption"></div>
             </figure>
 
-<h3 id="Pass-11（-00截断）"><a href="#Pass-11（-00截断）" class="headerlink" title="Pass-11（%00截断）"></a>Pass-11（%00截断）</h3><p>注意到此题save_path参数可控，并且是采用字符串拼接方式得到上传文件文件的保存路径。虽然前面设置了白名单，仅允许图片文件，但是可以先上传图片文件，再利用<strong>%00截断</strong>，修改文件后缀为.php，写入一句话🐎。</p>
+<h3 id="Pass-11（get-00截断）"><a href="#Pass-11（get-00截断）" class="headerlink" title="Pass-11（get%00截断）"></a>Pass-11（get%00截断）</h3><p>注意到此题save_path参数可控，并且是采用字符串拼接方式得到上传文件文件的保存路径。虽然前面设置了白名单，仅允许图片文件，但是可以先上传图片文件，再利用<strong>%00截断</strong>，修改文件后缀为.php，写入一句话🐎。</p>
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
@@ -258,7 +258,7 @@
                 <div class="image-caption"></div>
             </figure>
 
-<h3 id="Pass-12"><a href="#Pass-12" class="headerlink" title="Pass-12"></a>Pass-12</h3><p>此题与Pass-11类似，只是将get传参变成了post，不再赘述。</p>
+<h3 id="Pass-12（post-00截断）"><a href="#Pass-12（post-00截断）" class="headerlink" title="Pass-12（post%00截断）"></a>Pass-12（post%00截断）</h3><p>此题与Pass-11类似，只是将get传参变成了post，不再赘述。</p>
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
@@ -267,7 +267,34 @@
                 <div class="image-caption"></div>
             </figure>
 
-<h3 id="Pass-13"><a href="#Pass-13" class="headerlink" title="Pass-13"></a>Pass-13</h3><p>此题通过读取上传文件的前两个字节来判断文件类型。因此可以制作图片🐎</p>
+<h3 id="Pass-13-图片🐎-文件包含漏洞"><a href="#Pass-13-图片🐎-文件包含漏洞" class="headerlink" title="Pass-13(图片🐎+文件包含漏洞)"></a>Pass-13(图片🐎+文件包含漏洞)</h3><p>此题通过读取上传文件的前两个字节来判断文件类型。因此可以制作图片🐎如下，<strong>加入GIF89伪造gif格式</strong></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/upload-labs文件上传漏洞1-20关/image-20200728125242211.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>此时即可成功上传，再利用<strong>文件包含漏洞</strong>执行php，可以看到phpinfo();成功执行。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/upload-labs文件上传漏洞1-20关/image-20200728125503130.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<h3 id="Pass-14（图片🐎）"><a href="#Pass-14（图片🐎）" class="headerlink" title="Pass-14（图片🐎）"></a>Pass-14（图片🐎）</h3><p>此题用getimagesize函数来获取图片信息。</p>
+<p>该函数返回一个数组。<strong>数组下标0、1、2分别对应图片的宽度、高度、类型</strong>。这里可以采取跟Pass-13相同的方式写入图片🐎，再利用文件包含漏洞执行php命令，具体步骤参看Pass-13。</p>
+<img src="/images/upload-labs文件上传漏洞1-20关/image-20200728130051380.png" style="zoom:67%;">
+
+<h3 id="Pass-15（图片🐎）"><a href="#Pass-15（图片🐎）" class="headerlink" title="Pass-15（图片🐎）"></a>Pass-15（图片🐎）</h3><p>跟pass-14基本相同，只是换了个函数，这里用的是exif_imagetype函数。这个函数会根据图片的类型不同，返回不同的常量，同样采取Pass-13的方式，不再赘述。</p>
+<img src="/images/upload-labs文件上传漏洞1-20关/image-20200728130630307.png" style="zoom:67%;">
+
+<h3 id="Pass-16（二次渲染）"><a href="#Pass-16（二次渲染）" class="headerlink" title="Pass-16（二次渲染）"></a>Pass-16（二次渲染）</h3><p>这题的过滤还是比较严格的，判断了后缀名，检查了content-type，最后进行二次渲染。</p>
+<p><strong>gif</strong></p>
+<p>如果先上传一份带有植入了php命令的图片，再下载下来。用16进制编辑器查看，会发现经过二次渲染后的图片与原来的内容不一样了。php代码可能就不见了。此时我们只需找出渲染后和原来的图片相同的部分，再将php代码植入到该部分即可。</p>
 <h2 id="黑名单"><a href="#黑名单" class="headerlink" title="黑名单"></a>黑名单</h2><h3 id="Pass-03（php别名-htaccess）"><a href="#Pass-03（php别名-htaccess）" class="headerlink" title="Pass-03（php别名/.htaccess）"></a>Pass-03（php别名/.htaccess）</h3><p>过滤了asp、aspx、php、jsp四种后缀</p>
 <p><strong>绕过方法1</strong>：使用php后缀的别名phtml、phps、php5、pht</p>
 <p><strong>使用前提</strong>：apache的配置文件httpd.conf下有如下代码</p>

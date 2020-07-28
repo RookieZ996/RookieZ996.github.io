@@ -238,6 +238,36 @@
                 <div class="image-caption"></div>
             </figure>
 
+<h3 id="Pass-11（-00截断）"><a href="#Pass-11（-00截断）" class="headerlink" title="Pass-11（%00截断）"></a>Pass-11（%00截断）</h3><p>注意到此题save_path参数可控，并且是采用字符串拼接方式得到上传文件文件的保存路径。虽然前面设置了白名单，仅允许图片文件，但是可以先上传图片文件，再利用<strong>%00截断</strong>，修改文件后缀为.php，写入一句话🐎。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/upload-labs文件上传漏洞1-20关/image-20200728123834373.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p><strong>操作如下</strong>：</p>
+<p>上传一句话木马，文件后缀为.jpg，<strong>抓包修改save_path为../upload/1.php%00</strong>。</p>
+<p>此时经过字符串拼接操作，%00意味着字符串结束，<strong>$_GET[‘save_path’]后面的内容全被截掉，因此最终保存的路径就是../upload/1.php</strong>，完成了将文件后缀名转换回.php的操作。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/upload-labs文件上传漏洞1-20关/image-20200728124154431.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<h3 id="Pass-12"><a href="#Pass-12" class="headerlink" title="Pass-12"></a>Pass-12</h3><p>此题与Pass-11类似，只是将get传参变成了post，不再赘述。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/upload-labs文件上传漏洞1-20关/image-20200728124545911.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<h3 id="Pass-13"><a href="#Pass-13" class="headerlink" title="Pass-13"></a>Pass-13</h3><p>此题通过读取上传文件的前两个字节来判断文件类型。因此可以制作图片🐎</p>
 <h2 id="黑名单"><a href="#黑名单" class="headerlink" title="黑名单"></a>黑名单</h2><h3 id="Pass-03（php别名-htaccess）"><a href="#Pass-03（php别名-htaccess）" class="headerlink" title="Pass-03（php别名/.htaccess）"></a>Pass-03（php别名/.htaccess）</h3><p>过滤了asp、aspx、php、jsp四种后缀</p>
 <p><strong>绕过方法1</strong>：使用php后缀的别名phtml、phps、php5、pht</p>
 <p><strong>使用前提</strong>：apache的配置文件httpd.conf下有如下代码</p>

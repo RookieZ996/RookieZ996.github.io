@@ -297,6 +297,8 @@
 <p>如果先上传一份带有植入了php命令的图片，再下载下来。用16进制编辑器查看，会发现经过二次渲染后的图片与原来的内容不一样了。php代码可能就不见了。此时我们只需找出渲染后和原来的图片相同的部分，再将php代码植入到该部分即可。</p>
 <p><strong>jpg、png</strong></p>
 <p>师傅的博客写的很详细，有兴趣的读者可以去看看。</p>
+<blockquote>
+</blockquote>
 <h3 id="Pass-17（条件竞争）"><a href="#Pass-17（条件竞争）" class="headerlink" title="Pass-17（条件竞争）"></a>Pass-17（条件竞争）</h3><p>源代码中，先将上传文件保存，再进行if判断文件后缀是否在白名单中。在则重命名，上传成功；不在则删除该文件，上传失败。可以想象，如果我们<strong>在删除之前能够访问到我们上传的非法文件</strong>，那就万事大吉了。</p>
 <figure class="image-bubble">
                 <div class="img-lightbox">
@@ -412,6 +414,8 @@
 
 <h3 id="Pass-19-文件解析漏洞"><a href="#Pass-19-文件解析漏洞" class="headerlink" title="Pass-19(文件解析漏洞)"></a>Pass-19(文件解析漏洞)</h3><p>此题上传文件的名字可控，而且在过滤文件后缀时<strong>只考虑了文件名中最后一个.后面的内容</strong>，因此可以构造文件解析漏洞。上传文件名设置为<strong>shell.php.fff</strong>即可。此时fff不在黑名单中，可绕过过滤。</p>
 <p>apache在解析文件时会自右向左扫描后缀，看到fff后缀，不认识，跳过。再看到php，认识了，将文件交给php执行。但是此处需要环境支持，要设置php的配置文件，更改php识别文件的方式。具体可参考下面的博客，讲的很详细。但是我找不到里面说的php5.conf配置文件，因此无法配置成功。</p>
+<blockquote>
+</blockquote>
 <img src="/images/upload-labs文件上传漏洞1-20关/image-20200729181225500.png" style="zoom:67%;">
 
 <h3 id><a href="#" class="headerlink" title></a></h3>

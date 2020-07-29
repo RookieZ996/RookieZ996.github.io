@@ -295,6 +295,7 @@
 <h3 id="Pass-16（二次渲染）"><a href="#Pass-16（二次渲染）" class="headerlink" title="Pass-16（二次渲染）"></a>Pass-16（二次渲染）</h3><p>这题的过滤还是比较严格的，判断了后缀名，检查了content-type，最后进行二次渲染。</p>
 <p><strong>gif</strong></p>
 <p>如果先上传一份带有植入了php命令的图片，再下载下来。用16进制编辑器查看，会发现经过二次渲染后的图片与原来的内容不一样了。php代码可能就不见了。此时我们只需找出渲染后和原来的图片相同的部分，再将php代码植入到该部分即可。</p>
+<hr>
 <h2 id="黑名单"><a href="#黑名单" class="headerlink" title="黑名单"></a>黑名单</h2><h3 id="Pass-03（php别名-htaccess）"><a href="#Pass-03（php别名-htaccess）" class="headerlink" title="Pass-03（php别名/.htaccess）"></a>Pass-03（php别名/.htaccess）</h3><p>过滤了asp、aspx、php、jsp四种后缀</p>
 <p><strong>绕过方法1</strong>：使用php后缀的别名phtml、phps、php5、pht</p>
 <p><strong>使用前提</strong>：apache的配置文件httpd.conf下有如下代码</p>

